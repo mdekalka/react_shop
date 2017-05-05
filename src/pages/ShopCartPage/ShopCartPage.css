@@ -1,0 +1,9 @@
+.avatar-icon {
+  display: inline-block;
+  width: 65px;
+  height: 65px;
+  padding: 12px;
+  margin: 15px;
+  border-radius: 50%;
+  background-color: #34495E;
+}

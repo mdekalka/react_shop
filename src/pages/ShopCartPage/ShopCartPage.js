@@ -1,16 +1,71 @@
 import React, { Component } from 'react';
 
+import './ShopCartPage.css';
+
+import IconSelector from '../../components/IconSelector/IconSelector';
+import CartList from '../../components/Cart/CartList/CartList';
+
+import { filterByName } from '../../common/utils/utils';
+import { getFoodList, cartIcon } from './ShopCartPageService';
+
+const defaultIcon = {
+  source: cartIcon
+};
+
 class ShopCartPage extends Component {
   state = {
     formState: {
-      isNameEmpty: false
+      isNameEmpty: false,
+      name: '',
+      description: ''
     },
-    cartList: []
+    cartList: [{ name: 'Product item', description: 'lorem ipsum atl klgjlk', id: 1, source: cartIcon}],
+    isIconSelectorOpen: false,
+    foodList: getFoodList()
+  }
+
+  componentDidMount() {
+    this.setNameFocus();
+  }
+
+  setNameFocus() {
+    this.nameInput.focus();
   }
 
   // TODO: add example of validation
-  validation() {
+  validation() {}
 
+  selectIcon(list, id) {
+    return list.map(listItem =>
+      listItem.id === id ? { ...listItem, selected: true } : { ...listItem, selected: false }
+    );
+  }
+
+  getSelectedIcon(defaultIcon = {}) {
+    const { foodList } = this.state;
+
+    return foodList.find(foodItem => foodItem.selected) || defaultIcon;
+  }
+
+  onIconSelect = (selectedIcon) => {
+    this.setState(prevState => {
+      return {
+        foodList: this.selectIcon(prevState.foodList, selectedIcon.id),
+        isIconSelectorOpen: false
+      }
+    });
+  }
+
+  onIconToggle = (state) => {
+    if (typeof state !== 'boolean') {
+      state = !this.state.isIconSelectorOpen;
+    }
+
+    this.setState(prevState => {
+      return {
+        isIconSelectorOpen: state
+      }
+    })
   }
 
   onAddItem = (event) => {
@@ -23,15 +78,15 @@ class ShopCartPage extends Component {
         cartList: prevState.cartList.concat({ name, description })
       }
     }, this.resetFormValues);
+
+    this.setNameFocus();
   }
 
-  changeInputValue(name, value, callback) {
+  changeInputValue(name, value) {
     this.setState(prevState => {
       return {
         formState: { ...prevState.formState, [name]: value }
       }
-    }, () => {
-      callback && callback();
     });
   }
 
@@ -54,34 +109,53 @@ class ShopCartPage extends Component {
   }
 
   render() {
-    const { formState: { isNameEmpty }, cartList } = this.state;
+    const { formState: { isNameEmpty }, cartList, searchQuery, foodList, isIconSelectorOpen } = this.state;
+    const selectedIcon = this.getSelectedIcon(defaultIcon);
 
     return (
       <div>Shop basket
-        <div className="cart-list">
-          {/* TODO: change index to id */}
-          {cartList.map((cartItem, index) =>
-            <div key={index} className="cart-item">
-              <div>Name: {cartItem.name}</div>
-              <div>Description: {cartItem.description}</div>
-            </div>
-          )}
+        <div className="row">
+          <div className="col-half">
+            <h3>Add product to your cart list</h3>
+            <form onSubmit={this.onAddItem}>
+              <div className="form-row">
+                <label>
+                  <input 
+                    type="text"
+                    autoFocus={this.state.focus}
+                    autoComplete="off"
+                    placeholder='Product name'
+                    name="name"
+                    className="full-width"
+                    value={this.state.formState.name}
+                    ref={node => {this.nameInput = node; }}
+                    onChange={this.onInputChange}
+                  />
+                </label>
+              </div>
+              <div className="form-row">
+                <label>
+                  <input 
+                    type="text"
+                    autoComplete="off"
+                    placeholder='Product description'
+                    name="description"
+                    className="full-width"
+                    value={this.state.formState.description}
+                    onChange={this.onInputChange}
+                  />
+                </label>
+              </div>
+              <div className="avatar-icon pointer" onClick={this.onIconToggle}><img src={selectedIcon.source} alt="icon food choose"/></div>
+              <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={this.onIconSelect} onToggle={this.onIconToggle} />
+              <button type="submit">Add to list</button>
+            </form>
+          </div>
+          <div className="col-half">
+            <h3>Product list</h3>
+            <CartList list={cartList} />
+          </div>
         </div>
-        <h5>Add product to your cart list</h5>
-        <form onSubmit={this.onAddItem}>
-          <div className="form-row">
-            <label>
-              <input type="text" placeholder='Product name' name="name" value={this.state.formState.name} onChange={this.onInputChange} />
-              {isNameEmpty ? <span>A name is required</span> : null}
-            </label>
-          </div>
-          <div className="form-row">
-            <label>
-              <input type="text" placeholder='Product description' name="description" value={this.state.formState.description} onChange={this.onInputChange}/>
-            </label>
-          </div>
-          <button type="submit">Add to list</button>
-        </form>
       </div>
     )
   }

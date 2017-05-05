@@ -1,0 +1,35 @@
+.icon-list {
+  max-width: 350px;
+  display: inline-block;
+  padding: 15px;
+  background-color: #2C3E50;
+  border: 1px solid #22313F;
+}
+
+.icon-item {
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  padding: 15px;
+  border-radius: 50%;
+  background-color: #34495E;
+}
+
+.icon-item.selected {
+  background-color: #202d3a;
+}
+
+.icon-item:hover {
+  background-color: #202d3a;
+}
+
+.icon-item:last-child {
+  margin-right: 0;
+}
+
+.icon-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

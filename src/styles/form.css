@@ -1,0 +1,18 @@
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid transparent;
+  background-color: #34495E;
+  color: #f2f1ef;
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
+
+input[type="text"].full-width {
+  width: 100%;
+}
+
+.form-row {
+  margin-bottom: 15px;
+}
+

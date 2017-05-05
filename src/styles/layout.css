@@ -1,0 +1,17 @@
+.container {
+  widows: 98%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.row::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.col-half {
+  padding: 10px;
+  float: left;
+  width: 50%;
+}
