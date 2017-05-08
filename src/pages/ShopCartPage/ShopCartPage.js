@@ -2,29 +2,23 @@ import React, { Component } from 'react';
 
 import './ShopCartPage.css';
 
-import IconSelector from '../../components/IconSelector/IconSelector';
-import CartList from '../../components/Cart/CartList/CartList';
-import Counter from '../../components/Counter/Counter';
-import EmptyBlock from '../../components/EmptyBlock/EmptyBlock';
+import CartForm from '../../components/Cart/CartForm/CartForm';
+import CartView from '../../components/Cart/CartView/CartView';
 
-import { mockedCart, getFoodList, getTotal } from './ShopCartPageService';
+import { mockedCart,  } from '../../components/Cart/CartService';
 import ShopCartItem from './ShopCartItem';
+
+const INVALID_COUNT = 0;
 
 class ShopCartPage extends Component {
   state = {
     formState: new ShopCartItem(),
     cartList: [],
     isIconSelectorOpen: false,
-    foodList: getFoodList()
   }
 
   componentDidMount() {
     this.setState({ cartList: mockedCart.map(cartItem => new ShopCartItem(cartItem)) });
-    this.setNameFocus();
-  }
-
-  setNameFocus() {
-    this.nameInput.focus();
   }
 
   onIconSelect = (selectedIcon) => {
@@ -59,7 +53,8 @@ class ShopCartPage extends Component {
       }
     }, this.resetFormValues);
 
-    this.setNameFocus();
+    // TODO: add focus to parent?
+    // this.setNameFocus();
   }
 
   onRemoveItem = (item) => {
@@ -100,7 +95,7 @@ class ShopCartPage extends Component {
   onCounterClick = (direction) => {
     this.setState(prevState => {
       let updatedCount = this.countPrice(prevState.formState.count, direction);
-      if (updatedCount <= 0) {
+      if (updatedCount <= INVALID_COUNT) {
         return;
       }
 
@@ -113,7 +108,7 @@ class ShopCartPage extends Component {
   onPriceClick = (item, direction) => {
     this.setState(prevState => {
       let updatedCount = this.countPrice(item.count, direction);
-      if (updatedCount <= 0) {
+      if (updatedCount <= INVALID_COUNT) {
         return;
       }
 
@@ -129,62 +124,39 @@ class ShopCartPage extends Component {
     })
   }
 
-
   render() {
-    const { formState: { name, price, count, image }, cartList, foodList, isIconSelectorOpen } = this.state;
-    const total = getTotal(cartList);
+    const { formState, cartList, isIconSelectorOpen } = this.state;
 
     return (
-      <div>
-        <div className="row">
-          <div className="col-half">
-            <h3>Add product to your cart list</h3>
-            <form onSubmit={this.onAddItem}>
-              <div className="form-row">
-                <label>
-                  <input 
-                    type="text"
-                    autoFocus={this.state.focus}
-                    autoComplete="off"
-                    placeholder='Product name'
-                    name="name"
-                    className="full-width"
-                    value={this.state.formState.name}
-                    ref={node => {this.nameInput = node; }}
-                    onChange={this.onInputChange}
-                  />
-                </label>
-              </div>
-              <div className="form-row">
-                <label>
-                  <input 
-                    type="number"
-                    autoComplete="off"
-                    placeholder='Product price'
-                    name="price"
-                    min="0"
-                    className="full-width"
-                    value={this.state.formState.price}
-                    onChange={this.onInputChange}
-                  />
-                </label>
-              </div>
-              <Counter onClick={this.onCounterClick}>
-                <div className="counter-value">{count}</div>
-              </Counter>
-              <div className="avatar-icon pointer" onClick={this.onIconToggle}><img src={image.source} alt="icon food choose"/></div>
-              <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={this.onIconSelect} onToggle={this.onIconToggle} />
-              <button className="btn" type="submit" disabled={!name || !price}>Add to list</button>
-            </form>
-          </div>
-          <div className="col-half">
-            <h3>Product list</h3>
-            {cartList.length ?
-              <CartList list={cartList} onRemove={this.onRemoveItem} onPriceClick={this.onPriceClick} />
-            : <EmptyBlock title='Your cart list is empty' />
-            }
-            {cartList.length ? <div className="total-price">Total: {total} $</div> : null}
-          </div>
+      <div className="row">
+        <div className="col-half">
+          <h3>Add product to your cart list</h3>
+          <CartForm
+            formState={formState}
+            isIconSelectorOpen={isIconSelectorOpen}
+            onIconSelect={this.onIconSelect}
+            onAddItem={this.onAddItem}
+            onInputChange={this.onInputChange}
+            onCounterClick={this.onCounterClick}
+            onIconToggle={this.onIconToggle}
+          />
+        </div>
+        {/* TODO: Is this a better way to do partial-nested view? */}
+        <div className="col-half">
+          {this.props.children ?
+            React.cloneElement(this.props.children, {
+              list: cartList
+            })
+          :
+            <div>
+              <h3>Product list</h3>
+              <CartView 
+                cartList={cartList}
+                onRemoveItem={this.onRemoveItem}
+                onPriceClick={this.onPriceClick}
+              />
+            </div>
+          }
         </div>
       </div>
     )

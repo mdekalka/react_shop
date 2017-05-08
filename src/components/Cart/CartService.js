@@ -32,4 +32,6 @@ export const mockedCart = [{
   "name": "fish sticks",
   "price": "7",
   "count": 1
-}]
+}];
+
+export const findById = (list, id) => list.find(listItem => listItem.id === id);

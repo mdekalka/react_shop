@@ -1,6 +1,6 @@
 import uuidV4 from 'uuid/v4';
 
-import { cartIcon } from './ShopCartPageService';
+import { cartIcon } from '../../components/Cart/CartService';
 
 const defaultIcon = {
   source: cartIcon
