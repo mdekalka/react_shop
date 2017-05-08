@@ -3,20 +3,6 @@ import React, { Component } from 'react';
 import './IconSelector.css';
 
 class IconSelector extends Component {
-  // componentDidMount() {
-  //   document.addEventListener('click', this.onDocumentClick);
-  // }
-
-  // componentWillUnmount() {
-  //   document.removeEventListener('click', this.onDocumentClick);
-  // }
-
-  // onDocumentClick = (event) => {
-  //   if (!this.iconSelector.contains(event.target)) {
-  //     this.props.onToggle(false);
-  //   }
-  // }
-  
   render() {
     const { list, isOpen, onSelect } = this.props;
 
@@ -37,6 +23,6 @@ class IconSelector extends Component {
       </div>
     )
   }
-}
+};
 
 export default IconSelector;

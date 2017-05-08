@@ -17,3 +17,19 @@ export const getFoodList = () => {
   })
 };
 
+export const getTotal = (list) => {
+  return list.reduce((acc, value) => {
+    return acc + value.totalPrice;
+  }, 0);
+};
+
+export const mockedCart = [{
+  "name": "Buy apples",
+  "price": "1",
+  "count": 10
+  },
+  {
+  "name": "fish sticks",
+  "price": "7",
+  "count": 1
+}]

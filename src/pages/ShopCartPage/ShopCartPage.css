@@ -7,3 +7,8 @@
   border-radius: 50%;
   background-color: #34495E;
 }
+
+.total-price {
+  margin-top: 20px;
+  text-align: left;
+}

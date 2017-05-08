@@ -1,5 +1,17 @@
 .btn {
   outline: none;
   border: none;
-  padding: 8px 15px;
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: #34495E;
+  color: #f2f1ef;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
+
+.btn:disabled,
+.btn.disabled {
+  cursor: not-allowed;
+  background-color: #33363a;
+  opacity: .7;
 }

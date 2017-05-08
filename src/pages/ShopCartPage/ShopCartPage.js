@@ -4,27 +4,22 @@ import './ShopCartPage.css';
 
 import IconSelector from '../../components/IconSelector/IconSelector';
 import CartList from '../../components/Cart/CartList/CartList';
+import Counter from '../../components/Counter/Counter';
+import EmptyBlock from '../../components/EmptyBlock/EmptyBlock';
 
-import { filterByName } from '../../common/utils/utils';
-import { getFoodList, cartIcon } from './ShopCartPageService';
-
-const defaultIcon = {
-  source: cartIcon
-};
+import { mockedCart, getFoodList, getTotal } from './ShopCartPageService';
+import ShopCartItem from './ShopCartItem';
 
 class ShopCartPage extends Component {
   state = {
-    formState: {
-      isNameEmpty: false,
-      name: '',
-      description: ''
-    },
-    cartList: [{ name: 'Product item', description: 'lorem ipsum atl klgjlk', id: 1, source: cartIcon}],
+    formState: new ShopCartItem(),
+    cartList: [],
     isIconSelectorOpen: false,
     foodList: getFoodList()
   }
 
   componentDidMount() {
+    this.setState({ cartList: mockedCart.map(cartItem => new ShopCartItem(cartItem)) });
     this.setNameFocus();
   }
 
@@ -32,25 +27,10 @@ class ShopCartPage extends Component {
     this.nameInput.focus();
   }
 
-  // TODO: add example of validation
-  validation() {}
-
-  selectIcon(list, id) {
-    return list.map(listItem =>
-      listItem.id === id ? { ...listItem, selected: true } : { ...listItem, selected: false }
-    );
-  }
-
-  getSelectedIcon(defaultIcon = {}) {
-    const { foodList } = this.state;
-
-    return foodList.find(foodItem => foodItem.selected) || defaultIcon;
-  }
-
   onIconSelect = (selectedIcon) => {
     this.setState(prevState => {
       return {
-        foodList: this.selectIcon(prevState.foodList, selectedIcon.id),
+        formState: { ...prevState.formState, image: selectedIcon },
         isIconSelectorOpen: false
       }
     });
@@ -72,14 +52,22 @@ class ShopCartPage extends Component {
     event.preventDefault();
 
     this.setState(prevState => {
-      const { name, description } = prevState.formState;
+      const newCartItem = new ShopCartItem({ ...prevState.formState });
 
       return {
-        cartList: prevState.cartList.concat({ name, description })
+        cartList: prevState.cartList.concat(newCartItem)
       }
     }, this.resetFormValues);
 
     this.setNameFocus();
+  }
+
+  onRemoveItem = (item) => {
+    this.setState(prevState => {
+      return {
+        cartList: prevState.cartList.filter(cartItem => cartItem.id !== item.id)
+      }
+    })
   }
 
   changeInputValue(name, value) {
@@ -100,20 +88,54 @@ class ShopCartPage extends Component {
   resetFormValues() {
     this.setState(prevState => {
       return {
-        formState: {
-          name: '',
-          description: ''
-        }
+        formState: new ShopCartItem()
       }
     });
   }
 
+  countPrice(count, direction) {
+    return direction ? count += 1 : count -= 1;
+  }
+
+  onCounterClick = (direction) => {
+    this.setState(prevState => {
+      let updatedCount = this.countPrice(prevState.formState.count, direction);
+      if (updatedCount <= 0) {
+        return;
+      }
+
+      return {
+        formState: { ...prevState.formState, count: updatedCount }
+      }
+    })
+  }
+
+  onPriceClick = (item, direction) => {
+    this.setState(prevState => {
+      let updatedCount = this.countPrice(item.count, direction);
+      if (updatedCount <= 0) {
+        return;
+      }
+
+      return {
+        cartList: prevState.cartList.map(cartItem => {
+          if (cartItem.id === item.id) {
+            cartItem.count = updatedCount;
+          }
+
+          return cartItem;
+        })
+      }
+    })
+  }
+
+
   render() {
-    const { formState: { isNameEmpty }, cartList, searchQuery, foodList, isIconSelectorOpen } = this.state;
-    const selectedIcon = this.getSelectedIcon(defaultIcon);
+    const { formState: { name, price, count, image }, cartList, foodList, isIconSelectorOpen } = this.state;
+    const total = getTotal(cartList);
 
     return (
-      <div>Shop basket
+      <div>
         <div className="row">
           <div className="col-half">
             <h3>Add product to your cart list</h3>
@@ -136,24 +158,32 @@ class ShopCartPage extends Component {
               <div className="form-row">
                 <label>
                   <input 
-                    type="text"
+                    type="number"
                     autoComplete="off"
-                    placeholder='Product description'
-                    name="description"
+                    placeholder='Product price'
+                    name="price"
+                    min="0"
                     className="full-width"
-                    value={this.state.formState.description}
+                    value={this.state.formState.price}
                     onChange={this.onInputChange}
                   />
                 </label>
               </div>
-              <div className="avatar-icon pointer" onClick={this.onIconToggle}><img src={selectedIcon.source} alt="icon food choose"/></div>
+              <Counter onClick={this.onCounterClick}>
+                <div className="counter-value">{count}</div>
+              </Counter>
+              <div className="avatar-icon pointer" onClick={this.onIconToggle}><img src={image.source} alt="icon food choose"/></div>
               <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={this.onIconSelect} onToggle={this.onIconToggle} />
-              <button type="submit">Add to list</button>
+              <button className="btn" type="submit" disabled={!name || !price}>Add to list</button>
             </form>
           </div>
           <div className="col-half">
             <h3>Product list</h3>
-            <CartList list={cartList} />
+            {cartList.length ?
+              <CartList list={cartList} onRemove={this.onRemoveItem} onPriceClick={this.onPriceClick} />
+            : <EmptyBlock title='Your cart list is empty' />
+            }
+            {cartList.length ? <div className="total-price">Total: {total} $</div> : null}
           </div>
         </div>
       </div>

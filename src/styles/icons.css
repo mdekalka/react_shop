@@ -1,10 +1,12 @@
 .icon {
+  display: inline-block;
   width: 35px;
   height: 35px;
   padding: 8px;
+  background-color: #202d3a;
 }
 
-.icon-remove {
+.icon-remove:hover {
   background-color: #CF000F;
 }
 
