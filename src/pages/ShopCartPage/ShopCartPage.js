@@ -5,7 +5,7 @@ import './ShopCartPage.css';
 import CartForm from '../../components/Cart/CartForm/CartForm';
 import CartView from '../../components/Cart/CartView/CartView';
 
-import { mockedCart,  } from '../../components/Cart/CartService';
+import { mockedCart } from '../../components/Cart/CartService';
 import ShopCartItem from './ShopCartItem';
 
 const INVALID_COUNT = 0;
@@ -19,6 +19,10 @@ class ShopCartPage extends Component {
 
   componentDidMount() {
     this.setState({ cartList: mockedCart.map(cartItem => new ShopCartItem(cartItem)) });
+  }
+
+  setNameFocus() {
+    this.inputElement.focus();
   }
 
   onIconSelect = (selectedIcon) => {
@@ -53,8 +57,7 @@ class ShopCartPage extends Component {
       }
     }, this.resetFormValues);
 
-    // TODO: add focus to parent?
-    // this.setNameFocus();
+    this.setNameFocus();
   }
 
   onRemoveItem = (item) => {
@@ -139,6 +142,7 @@ class ShopCartPage extends Component {
             onInputChange={this.onInputChange}
             onCounterClick={this.onCounterClick}
             onIconToggle={this.onIconToggle}
+            inputRef={el => this.inputElement = el}
           />
         </div>
         {/* TODO: Is this a better way to do partial-nested view? */}

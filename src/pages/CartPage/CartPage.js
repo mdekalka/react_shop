@@ -5,17 +5,7 @@ import CartInfo from '../../components/Cart/CartInfo/CartInfo';
 import { findById } from '../../components/Cart/CartService';
 
 class CartPage extends Component {
-  state = {
-    currentId: null
-  }
-
-  componentWillReceiveProps(nextProps, nextState) {
-    if (nextProps.params.id !== this.props.params.id) {
-      this.setState({ currentId: nextProps.params.id});
-    }
-  }
-
-  renderInfo() {
+  _renderInfo() {
     if (!this.props.list.length) {
       return <div>No info yet</div>;
     } else {
@@ -26,7 +16,7 @@ class CartPage extends Component {
   }
 
   render() {
-    return this.renderInfo();
+    return this._renderInfo();
   }
 };
 

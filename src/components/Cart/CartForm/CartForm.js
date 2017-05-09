@@ -10,20 +10,8 @@ class CartForm extends Component {
     foodList: getFoodList()
   }
 
-  componentDidMount() {
-    this.setNameFocus();
-  }
-
-  setNameFocus() {
-    this.nameInput.focus();
-  }
-
-  onAddItem = (event) => {
-
-  }
-
   render() {
-    const { onAddItem, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen } = this.props;
+    const { onAddItem, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen, inputRef } = this.props;
     const { foodList } = this.state;
 
     return (
@@ -35,9 +23,10 @@ class CartForm extends Component {
               autoComplete="off"
               placeholder='Product name'
               name="name"
+              autoFocus
               className="full-width"
               value={formState.name}
-              ref={node => {this.nameInput = node; }}
+              ref={inputRef}
               onChange={onInputChange}
             />
           </label>
