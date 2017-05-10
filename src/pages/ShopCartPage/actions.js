@@ -58,7 +58,7 @@ export const loadCartList = () => (dispatch, getState) => {
           normalizeCartItem(cartItem);
       });
 
-      return dispatch(fetchCartListSuccess(cartList))
+      return dispatch(fetchCartListSuccess(cartList));
     })
     .catch(error => dispatch((fetchCartListFailed(error))));
 };

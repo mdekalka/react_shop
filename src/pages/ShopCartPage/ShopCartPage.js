@@ -7,7 +7,6 @@ import CartView from '../../components/Cart/CartView/CartView';
 
 import * as shopCartActions from './actions';
 import { normalizeCartItem, createCartItem } from './model';
-import { mockedCart } from '../../components/Cart/CartService';
 
 const INVALID_COUNT = 0;
 
@@ -138,11 +137,14 @@ class ShopCartPage extends Component {
           :
             <div>
               <h3>Product list</h3>
-              <CartView 
-                cartList={cartList}
-                onRemoveItem={this.onRemoveItem}
-                onPriceClick={this.onPriceClick}
-              />
+              {isFailed && !isFetching ? 
+                <div>Something went wrong: {errorMessage}</div>
+              : <CartView 
+                  cartList={cartList}
+                  onRemoveItem={this.onRemoveItem}
+                  onPriceClick={this.onPriceClick}
+                />
+              }
             </div>
           }
         </div>
