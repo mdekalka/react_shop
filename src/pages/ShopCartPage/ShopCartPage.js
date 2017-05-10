@@ -28,7 +28,7 @@ class ShopCartPage extends Component {
   onIconSelect = (selectedIcon) => {
     this.setState(prevState => {
       return {
-        formState: { ...prevState.formState, image: selectedIcon },
+        formState: new ShopCartItem({ ...prevState.formState, image: selectedIcon }),
         isIconSelectorOpen: false
       }
     });
@@ -71,7 +71,7 @@ class ShopCartPage extends Component {
   changeInputValue(name, value) {
     this.setState(prevState => {
       return {
-        formState: { ...prevState.formState, [name]: value }
+        formState: new ShopCartItem({ ...prevState.formState, [name]: value })
       }
     });
   }
@@ -103,7 +103,7 @@ class ShopCartPage extends Component {
       }
 
       return {
-        formState: { ...prevState.formState, count: updatedCount }
+        formState: new ShopCartItem({ ...prevState.formState, count: updatedCount })
       }
     })
   }
@@ -145,7 +145,6 @@ class ShopCartPage extends Component {
             inputRef={el => this.inputElement = el}
           />
         </div>
-        {/* TODO: Is this a better way to do partial-nested view? */}
         <div className="col-half">
           {this.props.children ?
             React.cloneElement(this.props.children, {

@@ -1,11 +1,35 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Counter from '../../Counter/Counter';
 import IconSelector from '../../IconSelector/IconSelector';
 
+import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
 import { getFoodList } from '../CartService';
 
 class CartForm extends Component {
+  static propTypes = {
+    onAddItem: PropTypes.func,
+    onInputChange: PropTypes.func.isRequired,
+    onCounterClick: PropTypes.func,
+    onIconSelect: PropTypes.func,
+    onIconToggle: PropTypes.func,
+    formState: PropTypes.instanceOf(ShopCartItem),
+    isIconSelectorOpen: PropTypes.bool,
+    inputRef: PropTypes.func
+  };
+
+  static defaultProps = {
+    onAddItem: () => {},
+    onInputChange: () => {},
+    onCounterClick: () => {},
+    onIconSelect: () => {},
+    onIconToggle: () => {},
+    formState: new ShopCartItem(),
+    isIconSelectorOpen: false,
+    inputRef: () => {}
+  };
+
   state = {
     foodList: getFoodList()
   }
@@ -54,6 +78,6 @@ class CartForm extends Component {
       </form>
     )
   }
-}
+};
 
 export default CartForm;

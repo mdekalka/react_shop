@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-import './CartItem.css';
-
 import Counter from '../../Counter/Counter';
+
+import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
+
+import './CartItem.css';
 
 const CartItem = (props) => {
   const { name, image, count, totalPrice } = props.item;
@@ -30,6 +33,14 @@ const CartItem = (props) => {
       </div>
     </div>
   )
+};
+
+CartItem.propTypes = {
+  item: PropTypes.instanceOf(ShopCartItem)
+};
+
+CartItem.defaultProps = {
+  item: new ShopCartItem()
 };
 
 export default CartItem;

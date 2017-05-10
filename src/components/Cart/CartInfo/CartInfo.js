@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+
+import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
 
 import './CartInfo.css';
 
@@ -14,6 +17,14 @@ const CartInfo = ({ info }) => {
       <Link to={'/'} className="btn">Back to list</Link>
     </div>
   )
+};
+
+CartInfo.propTypes = {
+  info: PropTypes.instanceOf(ShopCartItem)
+};
+
+CartInfo.defaultProps = {
+  info: new ShopCartItem()
 };
 
 export default CartInfo;
