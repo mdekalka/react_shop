@@ -4,12 +4,13 @@ import { Link } from 'react-router';
 
 import Counter from '../../Counter/Counter';
 
-import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
+import { totalPrice } from '../CartService';
 
 import './CartItem.css';
 
 const CartItem = (props) => {
-  const { name, image, count, totalPrice } = props.item;
+  const { name, image, count, price} = props.item;
+  const total = totalPrice(count, price);
 
   // Note: Create new functions in stateless components with care: each time CartItem will be rendered, <onCounter> fn
   // will creates and will re-render the <Counter> component
@@ -29,18 +30,18 @@ const CartItem = (props) => {
         <Counter onClick={onCounter}>
           <div className="counter-value">{count}</div>
         </Counter>
-        <div className="item-price">Total: {totalPrice} $</div>
+        <div className="item-price">Total: {total} $</div>
       </div>
     </div>
   )
 };
 
 CartItem.propTypes = {
-  item: PropTypes.instanceOf(ShopCartItem)
+  item: PropTypes.object
 };
 
 CartItem.defaultProps = {
-  item: new ShopCartItem()
+  item: {}
 };
 
 export default CartItem;

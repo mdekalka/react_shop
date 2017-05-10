@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
+import { totalPrice } from '../CartService';
 
 import './CartInfo.css';
 
@@ -13,18 +13,18 @@ const CartInfo = ({ info }) => {
       <img className="cart-image" src={info.image.source} alt="cart item preview"/>
       <div className="cart-row">Count: {info.count}</div>
       <div className="cart-row">Price: {info.price} $</div>
-      <div className="cart-row">Total: {info.totalPrice} $</div>
+      <div className="cart-row">Total: {totalPrice(info.count, info.price)} $</div>
       <Link to={'/'} className="btn">Back to list</Link>
     </div>
   )
 };
 
 CartInfo.propTypes = {
-  info: PropTypes.instanceOf(ShopCartItem)
+  info: PropTypes.object
 };
 
 CartInfo.defaultProps = {
-  info: new ShopCartItem()
+  info: {}
 };
 
 export default CartInfo;

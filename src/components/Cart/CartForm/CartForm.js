@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Counter from '../../Counter/Counter';
 import IconSelector from '../../IconSelector/IconSelector';
 
-import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
 import { getFoodList } from '../CartService';
 
 import './CartForm.css';
@@ -16,7 +15,7 @@ class CartForm extends Component {
     onCounterClick: PropTypes.func,
     onIconSelect: PropTypes.func,
     onIconToggle: PropTypes.func,
-    formState: PropTypes.instanceOf(ShopCartItem),
+    formState: PropTypes.object,
     isIconSelectorOpen: PropTypes.bool,
     inputRef: PropTypes.func
   };
@@ -27,7 +26,7 @@ class CartForm extends Component {
     onCounterClick: () => {},
     onIconSelect: () => {},
     onIconToggle: () => {},
-    formState: new ShopCartItem(),
+    formState: {},
     isIconSelectorOpen: false,
     inputRef: () => {}
   };

@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import CartForm from '../../components/Cart/CartForm/CartForm';
 import CartView from '../../components/Cart/CartView/CartView';
 
+import * as shopCartActions from './actions';
+import { normalizeCartItem, createCartItem } from './model';
 import { mockedCart } from '../../components/Cart/CartService';
-import ShopCartItem from './ShopCartItem';
 
 const INVALID_COUNT = 0;
 
 class ShopCartPage extends Component {
   state = {
-    formState: new ShopCartItem(),
-    cartList: [],
-    isIconSelectorOpen: false,
+    formState: createCartItem(),
+    isIconSelectorOpen: false
   }
 
   componentDidMount() {
-    this.setState({ cartList: mockedCart.map(cartItem => new ShopCartItem(cartItem)) });
+    this.props.shopCartActions.loadCartList().then(() => {
+      // Note: promise returns from thunk action creator to component. You can put any component-based logic here
+    });
   }
 
   setNameFocus() {
@@ -26,7 +30,7 @@ class ShopCartPage extends Component {
   onIconSelect = (selectedIcon) => {
     this.setState(prevState => {
       return {
-        formState: new ShopCartItem({ ...prevState.formState, image: selectedIcon }),
+        formState: ({ ...prevState.formState, image: selectedIcon }),
         isIconSelectorOpen: false
       }
     });
@@ -46,30 +50,22 @@ class ShopCartPage extends Component {
 
   onAddItem = (event) => {
     event.preventDefault();
+    const { formState } = this.state;
 
-    this.setState(prevState => {
-      const newCartItem = new ShopCartItem({ ...prevState.formState });
+    this.props.shopCartActions.onItemAdd(normalizeCartItem(formState));
 
-      return {
-        cartList: prevState.cartList.concat(newCartItem)
-      }
-    }, this.resetFormValues);
-
+    this.resetFormValues();
     this.setNameFocus();
   }
 
   onRemoveItem = (item) => {
-    this.setState(prevState => {
-      return {
-        cartList: prevState.cartList.filter(cartItem => cartItem.id !== item.id)
-      }
-    })
+    this.props.shopCartActions.onItemRemove(item.id);
   }
 
   changeInputValue(name, value) {
     this.setState(prevState => {
       return {
-        formState: new ShopCartItem({ ...prevState.formState, [name]: value })
+        formState: ({ ...prevState.formState, [name]: value })
       }
     });
   }
@@ -84,7 +80,7 @@ class ShopCartPage extends Component {
   resetFormValues() {
     this.setState(prevState => {
       return {
-        formState: new ShopCartItem()
+        formState: createCartItem()
       }
     });
   }
@@ -101,32 +97,23 @@ class ShopCartPage extends Component {
       }
 
       return {
-        formState: new ShopCartItem({ ...prevState.formState, count: updatedCount })
+        formState: ({ ...prevState.formState, count: updatedCount })
       }
     })
   }
 
   onPriceClick = (item, direction) => {
-    this.setState(prevState => {
-      let updatedCount = this.countPrice(item.count, direction);
-      if (updatedCount <= INVALID_COUNT) {
-        return;
-      }
+    let updatedCount = this.countPrice(item.count, direction);
+    if (updatedCount <= INVALID_COUNT) {
+      return;
+    }
 
-      return {
-        cartList: prevState.cartList.map(cartItem => {
-          if (cartItem.id === item.id) {
-            cartItem.count = updatedCount;
-          }
-
-          return cartItem;
-        })
-      }
-    })
+    this.props.shopCartActions.onCounterChange(item.id, updatedCount);
   }
 
   render() {
-    const { formState, cartList, isIconSelectorOpen } = this.state;
+    const { formState, isIconSelectorOpen } = this.state;
+    const { cartList, isFetching, isFailed, errorMessage } = this.props;
 
     return (
       <div className="row">
@@ -163,5 +150,22 @@ class ShopCartPage extends Component {
     )
   }
 };
+
+const mapStateToProps = (state) => {
+    return {
+        cartList: state.shopCart.cartList,
+        isFetching: state.shopCart.isFetching,
+        isFailed: state.shopCart.isFailed,
+        errorMessage: state.shopCart.errorMessage
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        shopCartActions: bindActionCreators(shopCartActions, dispatch)
+    }
+};
+
+ShopCartPage = connect(mapStateToProps, mapDispatchToProps)(ShopCartPage);
 
 export default ShopCartPage;
