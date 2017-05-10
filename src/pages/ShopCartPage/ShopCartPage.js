@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import './ShopCartPage.css';
-
 import CartForm from '../../components/Cart/CartForm/CartForm';
 import CartView from '../../components/Cart/CartView/CartView';
 
 import { mockedCart } from '../../components/Cart/CartService';
 import ShopCartItem from './ShopCartItem';
+
+import './ShopCartPage.css';
 
 const INVALID_COUNT = 0;
 
@@ -78,7 +78,7 @@ class ShopCartPage extends Component {
 
   onInputChange = (event) => {
     const target = event.target;
-    const value = target.value.trim();
+    const value = target.value;
 
     this.changeInputValue(target.name, value);
   }

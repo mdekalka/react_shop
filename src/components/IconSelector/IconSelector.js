@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './IconSelector.css';
 
 class IconSelector extends Component {
+  static propTypes = {
+    list: PropTypes.array.isRequired,
+    isOpen: PropTypes.bool,
+    onSelect: PropTypes.func
+  };
+
+  static defaultProps = {
+    list: [],
+    isOpen: false,
+    onSelect: () => {}
+  };
+
   render() {
     const { list, isOpen, onSelect } = this.props;
 

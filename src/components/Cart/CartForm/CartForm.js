@@ -7,6 +7,8 @@ import IconSelector from '../../IconSelector/IconSelector';
 import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
 import { getFoodList } from '../CartService';
 
+import './CartForm.css';
+
 class CartForm extends Component {
   static propTypes = {
     onAddItem: PropTypes.func,
