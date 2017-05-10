@@ -5,6 +5,7 @@ import Counter from '../../Counter/Counter';
 import IconSelector from '../../IconSelector/IconSelector';
 
 import { getFoodList } from '../CartService';
+import { createCartItem } from '../../../pages/ShopCartPage/model';
 
 import './CartForm.css';
 
@@ -26,7 +27,7 @@ class CartForm extends Component {
     onCounterClick: () => {},
     onIconSelect: () => {},
     onIconToggle: () => {},
-    formState: {},
+    formState: createCartItem(),
     isIconSelectorOpen: false,
     inputRef: () => {}
   };

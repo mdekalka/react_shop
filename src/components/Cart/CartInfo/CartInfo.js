@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 import { totalPrice } from '../CartService';
+import { createCartItem } from '../../../pages/ShopCartPage/model';
 
 import './CartInfo.css';
 
@@ -24,7 +25,7 @@ CartInfo.propTypes = {
 };
 
 CartInfo.defaultProps = {
-  info: {}
+  info: createCartItem()
 };
 
 export default CartInfo;

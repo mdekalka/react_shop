@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import Counter from '../../Counter/Counter';
 
 import { totalPrice } from '../CartService';
+import { createCartItem } from '../../../pages/ShopCartPage/model';
 
 import './CartItem.css';
 
@@ -41,7 +42,7 @@ CartItem.propTypes = {
 };
 
 CartItem.defaultProps = {
-  item: {}
+  item: createCartItem()
 };
 
 export default CartItem;
