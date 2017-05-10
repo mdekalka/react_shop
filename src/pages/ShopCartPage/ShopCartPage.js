@@ -6,8 +6,6 @@ import CartView from '../../components/Cart/CartView/CartView';
 import { mockedCart } from '../../components/Cart/CartService';
 import ShopCartItem from './ShopCartItem';
 
-import './ShopCartPage.css';
-
 const INVALID_COUNT = 0;
 
 class ShopCartPage extends Component {
