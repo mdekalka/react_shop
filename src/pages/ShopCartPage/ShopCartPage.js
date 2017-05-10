@@ -4,19 +4,19 @@ import CartForm from '../../components/Cart/CartForm/CartForm';
 import CartView from '../../components/Cart/CartView/CartView';
 
 import { mockedCart } from '../../components/Cart/CartService';
-import ShopCartItem from './ShopCartItem';
+import { normalizeCartItem, createCartItem } from './model';
 
 const INVALID_COUNT = 0;
 
 class ShopCartPage extends Component {
   state = {
-    formState: new ShopCartItem(),
+    formState: createCartItem(),
     cartList: [],
     isIconSelectorOpen: false,
   }
 
   componentDidMount() {
-    this.setState({ cartList: mockedCart.map(cartItem => new ShopCartItem(cartItem)) });
+    this.setState({ cartList: mockedCart.map(cartItem => normalizeCartItem(cartItem)) });
   }
 
   setNameFocus() {
@@ -26,7 +26,7 @@ class ShopCartPage extends Component {
   onIconSelect = (selectedIcon) => {
     this.setState(prevState => {
       return {
-        formState: new ShopCartItem({ ...prevState.formState, image: selectedIcon }),
+        formState: ({ ...prevState.formState, image: selectedIcon }),
         isIconSelectorOpen: false
       }
     });
@@ -48,7 +48,7 @@ class ShopCartPage extends Component {
     event.preventDefault();
 
     this.setState(prevState => {
-      const newCartItem = new ShopCartItem({ ...prevState.formState });
+      const newCartItem = normalizeCartItem(prevState.formState);
 
       return {
         cartList: prevState.cartList.concat(newCartItem)
@@ -69,7 +69,7 @@ class ShopCartPage extends Component {
   changeInputValue(name, value) {
     this.setState(prevState => {
       return {
-        formState: new ShopCartItem({ ...prevState.formState, [name]: value })
+        formState: ({ ...prevState.formState, [name]: value })
       }
     });
   }
@@ -84,7 +84,7 @@ class ShopCartPage extends Component {
   resetFormValues() {
     this.setState(prevState => {
       return {
-        formState: new ShopCartItem()
+        formState: createCartItem()
       }
     });
   }
@@ -101,7 +101,7 @@ class ShopCartPage extends Component {
       }
 
       return {
-        formState: new ShopCartItem({ ...prevState.formState, count: updatedCount })
+        formState: ({ ...prevState.formState, count: updatedCount })
       }
     })
   }

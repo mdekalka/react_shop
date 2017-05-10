@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import CartList from '../CartList/CartList';
 import EmptyBlock from '../../EmptyBlock/EmptyBlock';
 
-import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
 import { getTotal } from '../CartService';
 
 import './CartView.css';
@@ -25,7 +24,7 @@ const CartView = (props) => {
 };
 
 CartView.propTypes = {
-  cartList: PropTypes.arrayOf(PropTypes.instanceOf(ShopCartItem)),
+  cartList: PropTypes.array,
   onRemoveItem: PropTypes.func,
   onPriceClick: PropTypes.func
 };

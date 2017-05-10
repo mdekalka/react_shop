@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
+import { createCartItem } from '../../../pages/ShopCartPage/model';
 
 import './CartInfo.css';
 
@@ -20,11 +20,11 @@ const CartInfo = ({ info }) => {
 };
 
 CartInfo.propTypes = {
-  info: PropTypes.instanceOf(ShopCartItem)
+  info: PropTypes.object
 };
 
 CartInfo.defaultProps = {
-  info: new ShopCartItem()
+  info: createCartItem()
 };
 
 export default CartInfo;

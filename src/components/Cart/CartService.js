@@ -17,9 +17,13 @@ export const getFoodList = () => {
   })
 };
 
+export const totalPrice = (count, price) => {
+  return count * parseFloat(price, 10);
+}
+
 export const getTotal = (list) => {
   return list.reduce((acc, value) => {
-    return acc + value.totalPrice;
+    return acc + totalPrice(value.count, value.price);
   }, 0);
 };
 

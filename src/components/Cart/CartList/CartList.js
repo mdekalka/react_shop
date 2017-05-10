@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import CartItem from '../CartItem/CartItem';
 
-import ShopCartItem from '../../../pages/ShopCartPage/ShopCartItem';
-
 const CartList = (props) => {
   const { list, onPriceClick, onRemove} = props;
 
@@ -18,7 +16,7 @@ const CartList = (props) => {
 };
 
 CartList.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.instanceOf(ShopCartItem)),
+  list: PropTypes.array,
   onPriceClick: PropTypes.func,
   onRemove: PropTypes.func
 };
