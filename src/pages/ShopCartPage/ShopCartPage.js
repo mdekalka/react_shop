@@ -41,7 +41,7 @@ class ShopCartPage extends Component {
       return {
         isIconSelectorOpen: state
       }
-    })
+    });
   }
 
   onAddItem = (event) => {
@@ -63,7 +63,7 @@ class ShopCartPage extends Component {
       return {
         cartList: prevState.cartList.filter(cartItem => cartItem.id !== item.id)
       }
-    })
+    });
   }
 
   changeInputValue(name, value) {
@@ -103,7 +103,7 @@ class ShopCartPage extends Component {
       return {
         formState: ({ ...prevState.formState, count: updatedCount })
       }
-    })
+    });
   }
 
   onPriceClick = (item, direction) => {
@@ -122,7 +122,7 @@ class ShopCartPage extends Component {
           return cartItem;
         })
       }
-    })
+    });
   }
 
   render() {

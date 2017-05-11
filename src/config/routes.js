@@ -7,7 +7,7 @@ import CartPage from '../pages/CartPage/CartPage';
 
 const routes = (
   <Router history={hashHistory} >
-    <Route component={AppPage}>
+    <Route component={AppPage} >
       <Route path="/" component={ShopCartPage} >
         <Route path="item/:id" component={CartPage} />
       </Route>
