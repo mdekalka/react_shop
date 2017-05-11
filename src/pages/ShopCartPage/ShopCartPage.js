@@ -44,7 +44,7 @@ class ShopCartPage extends Component {
       return {
         isIconSelectorOpen: state
       }
-    })
+    });
   }
 
   onAddItem = (event) => {
@@ -98,7 +98,7 @@ class ShopCartPage extends Component {
       return {
         formState: ({ ...prevState.formState, count: updatedCount })
       }
-    })
+    });
   }
 
   onPriceClick = (item, direction) => {

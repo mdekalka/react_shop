@@ -25,6 +25,8 @@ class CartPage extends Component {
   }
 
   render() {
+    this.props
+    debugger
     return this._renderInfo();
   }
 };

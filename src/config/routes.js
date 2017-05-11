@@ -11,11 +11,11 @@ import store from './configStore';
 const routes = (
   <Provider store={store} >
     <Router history={hashHistory} >
-        <Route component={AppPage} >
-            <Route path="/" component={ShopCartPage} >
-              <Route path="item/:id" component={CartPage} />
-            </Route>
+      <Route component={AppPage} >
+        <Route path="/" component={ShopCartPage} >
+          <Route path="item/:id" component={CartPage} />
         </Route>
+      </Route>
     </Router>
   </Provider>
 );

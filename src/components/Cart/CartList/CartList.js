@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CartItem from '../CartItem/CartItem';
 
 const CartList = (props) => {
-  const { list, onPriceClick, onRemove} = props;
+  const { list, onPriceClick, onRemove } = props;
 
   return (
     <div className="cart-list">
