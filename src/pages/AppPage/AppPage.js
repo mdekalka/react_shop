@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import './AppPage.css';
-
 import logo from '../../assets/icons/logo.svg';
+import './AppPage.css';
 
 class AppPage extends Component {
   render() {
