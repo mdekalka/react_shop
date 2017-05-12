@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 
 import { totalPrice } from '../CartService';
 import { createCartItem } from '../../../pages/ShopCartPage/model';
-import { totalPrice } from '../CartService';
 
 import './CartInfo.css';
 
