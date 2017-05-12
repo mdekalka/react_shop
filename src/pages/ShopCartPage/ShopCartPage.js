@@ -7,6 +7,7 @@ import CartView from '../../components/Cart/CartView/CartView';
 
 import * as shopCartActions from './actions';
 import { normalizeCartItem, createCartItem } from './model';
+import { selectCartList, selectTotalPrice } from './selectors';
 
 const INVALID_COUNT = 0;
 
@@ -112,7 +113,7 @@ class ShopCartPage extends Component {
 
   render() {
     const { formState, isIconSelectorOpen } = this.state;
-    const { cartList, isFetching, isFailed, errorMessage } = this.props;
+    const { cartList, totalPrice, isFetching, isFailed, errorMessage } = this.props;
 
     return (
       <div className="row">
@@ -143,6 +144,7 @@ class ShopCartPage extends Component {
                   cartList={cartList}
                   onRemoveItem={this.onRemoveItem}
                   onPriceClick={this.onPriceClick}
+                  total={totalPrice}
                 />
               }
             </div>
@@ -155,7 +157,8 @@ class ShopCartPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cartList: state.shopCart.cartList,
+        cartList: selectCartList(state),
+        totalPrice: selectTotalPrice(state),
         isFetching: state.shopCart.isFetching,
         isFailed: state.shopCart.isFailed,
         errorMessage: state.shopCart.errorMessage

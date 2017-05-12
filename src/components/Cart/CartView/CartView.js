@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import CartList from '../CartList/CartList';
 import EmptyBlock from '../../EmptyBlock/EmptyBlock';
 
-import { getTotal } from '../CartService';
-
 import './CartView.css';
 
 const CartView = (props) => {
-  const { cartList, onRemoveItem, onPriceClick } = props;
-  const total = getTotal(cartList);
+  const { cartList, onRemoveItem, onPriceClick, total } = props;
 
   return (
     <div>
@@ -26,13 +23,15 @@ const CartView = (props) => {
 CartView.propTypes = {
   cartList: PropTypes.array,
   onRemoveItem: PropTypes.func,
-  onPriceClick: PropTypes.func
+  onPriceClick: PropTypes.func,
+  total: PropTypes.number
 };
 
 CartView.defaultProps = {
   cartList: [],
   onRemoveItem: () => {},
-  onPriceClick: () => {}
+  onPriceClick: () => {},
+  total: null
 };
 
 export default CartView;
