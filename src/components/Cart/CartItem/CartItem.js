@@ -6,11 +6,12 @@ import Counter from '../../Counter/Counter';
 
 import { totalPrice } from '../CartService';
 import { createCartItem } from '../../../pages/ShopCartPage/model';
+import { totalPrice } from '../CartService';
 
 import './CartItem.css';
 
 const CartItem = (props) => {
-  const { name, image, count, price} = props.item;
+  const { name, image, count, price } = props.item;
   const total = totalPrice(count, price);
 
   const onCounter = (direction) => {
