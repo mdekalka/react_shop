@@ -2,13 +2,24 @@
   text-align: center;
 }
 
-.logo {
+.logo-container {
   height: 50px;
   line-height: 50px;
-  color: #00d8ff;
   font-size: 22px;
   font-weight: 300;
   display: inline-block;
+}
+
+.logo {
+  margin: 0 10px;
+}
+
+.react-logo {
+  color: #00d8ff;
+}
+
+.redux-logo {
+  color: #7550b7;
 }
 
 .logo-img {
