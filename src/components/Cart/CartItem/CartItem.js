@@ -5,11 +5,13 @@ import { Link } from 'react-router';
 import Counter from '../../Counter/Counter';
 
 import { createCartItem } from '../../../pages/ShopCartPage/model';
+import { totalPrice } from '../CartService';
 
 import './CartItem.css';
 
 const CartItem = (props) => {
-  const { name, image, count, totalPrice } = props.item;
+  const { name, image, count, price } = props.item;
+  const total = totalPrice(count, price);
 
   const onCounter = (direction) => {
     props.onCounterClick(props.item, direction);
@@ -27,7 +29,7 @@ const CartItem = (props) => {
         <Counter onClick={onCounter}>
           <div className="counter-value">{count}</div>
         </Counter>
-        <div className="item-price">Total: {totalPrice} $</div>
+        <div className="item-price">Total: {total} $</div>
       </div>
     </div>
   )
