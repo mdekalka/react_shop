@@ -13,8 +13,6 @@ const CartItem = (props) => {
   const { name, image, count, price} = props.item;
   const total = totalPrice(count, price);
 
-  // Note: Create new functions in stateless components with care: each time CartItem will be rendered, <onCounter> fn
-  // will creates and will re-render the <Counter> component
   const onCounter = (direction) => {
     props.onCounterClick(props.item, direction);
   }
