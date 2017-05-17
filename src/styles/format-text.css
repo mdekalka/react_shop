@@ -1,0 +1,13 @@
+.link {
+  color: #7db025;
+  transition: color .2 ease-in;
+}
+
+.link:hover {
+  color: #a6e22e;
+}
+
+.formatted-text {
+  padding: 15px;
+  font-size: 14px;
+}

@@ -1,0 +1,22 @@
+.modal-container {
+
+}
+
+.modal {
+  position: absolute;
+  max-height: 650px;
+  max-width: 650px;
+  padding: 12px;
+  border: 1px solid #212F3D;
+  background-color: #34495e;
+  animation: appear-from-bottom 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes appear-from-bottom {
+  0% {
+    transform: translate3d(0, 15px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}

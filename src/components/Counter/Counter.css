@@ -1,3 +1,7 @@
+.counter-container {
+  display: inline-block;
+}
+
 .counter-container .counter-value {
   display: inline-block;
   margin: 0 15px;

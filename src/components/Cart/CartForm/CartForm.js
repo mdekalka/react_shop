@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 import Counter from '../../Counter/Counter';
 import IconSelector from '../../IconSelector/IconSelector';
+import { CounterPreview, CounterPreviewModel } from '../../Preview/CounterPreview';
+import CartInputsPreview from '../../Preview/CartInputsPreview/CartInputsPreview';
+import AddButtonPreview from '../../Preview/AddButtonPreview/AddButtonPreview';
+import IconSelectorPreview from '../../Preview/IconSelectorPreview/IconSelectorPreview';
 
 import { getFoodList } from '../CartService';
 import { createCartItem } from '../../../pages/ShopCartPage/model';
@@ -12,6 +16,7 @@ import './CartForm.css';
 class CartForm extends Component {
   static propTypes = {
     onAddItem: PropTypes.func,
+    onCircleClick: PropTypes.func,
     onInputChange: PropTypes.func.isRequired,
     onCounterClick: PropTypes.func,
     onIconSelect: PropTypes.func,
@@ -23,6 +28,7 @@ class CartForm extends Component {
 
   static defaultProps = {
     onAddItem: () => {},
+    onCircleClick: () => {},
     onInputChange: () => {},
     onCounterClick: () => {},
     onIconSelect: () => {},
@@ -37,46 +43,20 @@ class CartForm extends Component {
   }
 
   render() {
-    const { onAddItem, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen, inputRef } = this.props;
+    const { onAddItem, onCircleClick, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen, inputRef } = this.props;
     const { foodList } = this.state;
 
     return (
       <form onSubmit={onAddItem}>
-        <div className="form-row">
-          <label>
-            <input 
-              type="text"
-              autoComplete="off"
-              placeholder='Product name'
-              name="name"
-              autoFocus
-              className="full-width"
-              value={formState.name}
-              ref={inputRef}
-              onChange={onInputChange}
-            />
-          </label>
-        </div>
-        <div className="form-row">
-          <label>
-            <input 
-              type="number"
-              autoComplete="off"
-              placeholder='Product price'
-              name="price"
-              min="0"
-              className="full-width"
-              value={formState.price}
-              onChange={onInputChange}
-            />
-          </label>
-        </div>
-        <Counter onClick={onCounterClick}>
+        <CartInputsPreview inputRef={inputRef} formState={formState} onInputChange={onInputChange} onCircleClick={onCircleClick} />
+
+        <CounterPreview onClick={onCounterClick} onCircleClick={onCircleClick} >
           <div className="counter-value">{formState.count}</div>
-        </Counter>
-        <div className="avatar-icon pointer" onClick={onIconToggle}><img src={formState.image.source} alt="icon food choose"/></div>
+        </CounterPreview>
+
+        <IconSelectorPreview onIconToggle={onIconToggle} formState={formState} onCircleClick={onCircleClick} />
         <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={onIconSelect} onToggle={onIconToggle} />
-        <button className="btn" type="submit" disabled={!formState.name || !formState.price}>Add to list</button>
+        <AddButtonPreview formState={formState} title={'Add to list'} onCircleClick={onCircleClick} />
       </form>
     )
   }
