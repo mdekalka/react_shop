@@ -17,6 +17,7 @@
   border-bottom: none;
   list-style: none;
   outline: none;
+  text-transform: capitalize;
 }
 
 .react-tabs__tab--selected {

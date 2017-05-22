@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { PrismCode } from 'react-prism';
 
-import Modal from '../../components/Modal/Modal';
+import ModalContent from '../../components/ModalContent/ModalContent';
 import CartForm from '../../components/Cart/CartForm/CartForm';
 import CartView from '../../components/Cart/CartView/CartView';
-import { CounterPreviewModel } from '../../components/Preview/CounterPreview';
 import LogoHeaderPreview from '../../components/Preview/LogoHeaderPreview/LogoHeaderPreview';
+
+import CounterPreviewModel from '../../components/Preview/CounterPreview/CounterPreviewModel';
+import LogoHeaderPreviewModel from '../../components/Preview/LogoHeaderPreview/LogoHeaderPreviewModel';
+import CartInputsPreviewModel from '../../components/Preview/CartInputsPreview/CartInputsPreviewModel';
 
 import { mockedCart } from '../../components/Cart/CartService';
 import { normalizeCartItem, createCartItem } from './model';
 
-import reactLogo from '../../assets/icons/react.svg';
-import reduxLogo from '../../assets/icons/redux.svg';
-
 const INVALID_COUNT = 0;
+const CONTENT = [CounterPreviewModel, LogoHeaderPreviewModel, CartInputsPreviewModel];
 
 class ShopCartPage extends Component {
   state = {
@@ -23,22 +22,33 @@ class ShopCartPage extends Component {
     isIconSelectorOpen: false,
     showModal: false,
     bounds: {},
+    modalContent: {}
   }
 
   componentDidMount() {
-    this.setState({ cartList: mockedCart.map(cartItem => normalizeCartItem(cartItem)) });
+    this.setState({ 
+      cartList: mockedCart.map(cartItem => normalizeCartItem(cartItem))
+    });
+
+    this.formatSourceContent();
   }
 
-  onCircleClick = (element, bounds, event) => {
-    this.openModalHandler(bounds);
+  formatSourceContent() {
+    this.content = {};
+
+    CONTENT.forEach(item => this.content[item.key] = item);
+  }
+
+  onCircleClick = (name, element, bounds, event) => {
+    this.setState({ 
+      showModal: true,
+      modalContent: this.content[name],
+      bounds
+    });
   }
 
   closeModalHandler = () => {
     this.setState({ showModal: false });
-  }
-
-  openModalHandler = (bounds) => {
-    this.setState({ showModal: true, bounds });
   }
 
   setNameFocus() {
@@ -148,11 +158,11 @@ class ShopCartPage extends Component {
   }
 
   render() {
-    const { formState, cartList, isIconSelectorOpen, showModal, bounds } = this.state;
+    const { formState, cartList, isIconSelectorOpen, showModal, bounds, modalContent } = this.state;
 
     return (
       <div className="row">
-        <LogoHeaderPreview reactLogo={reactLogo} reduxLogo={reduxLogo} onCircleClick={this.onCircleClick} />
+        <LogoHeaderPreview onCircleClick={this.onCircleClick} />
         <div className="col-half">
           <h3>Add product to your cart list</h3>
           <CartForm
@@ -183,22 +193,7 @@ class ShopCartPage extends Component {
             </div>
           }
         </div>
-        <Modal isOpen={showModal} bounds={bounds} >
-          <Tabs className="react-tabs notes-tabs">
-            <TabList>
-              <Tab className="react-tabs__tab react-tab">React</Tab>
-              <Tab className="react-tabs__tab redux-tab">Redux</Tab>
-            </TabList>
-
-            <TabPanel>
-              <div className="formatted-text">You should use <a className="link" href="https://facebook.github.io/react/docs/forms.html#controlled-components" target="_blank">controlled</a> components</div>
-            </TabPanel>
-            <TabPanel>
-              <PrismCode className="language-javascript">{CounterPreviewModel.react.content}</PrismCode>
-            </TabPanel>
-          </Tabs>
-          <button className="btn btn-tab" onClick={this.closeModalHandler}>close me</button>
-        </Modal>
+        <ModalContent showModal={showModal} bounds={bounds} content={modalContent.data} onClose={this.closeModalHandler} />
       </div>
     )
   }

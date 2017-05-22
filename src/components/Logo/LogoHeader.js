@@ -1,8 +1,10 @@
 import React from 'react';
 
 import Logo from './Logo';
+import reactLogo from '../../assets/icons/react.svg';
+import reduxLogo from '../../assets/icons/redux.svg';
 
-const LogoHeader = ({ nodeRef, reactLogo, reduxLogo }) => {
+const LogoHeader = ({ nodeRef }) => {
   return (
     <h2 className="logo-container" ref={nodeRef} >
       <span className="logo react-logo">

@@ -1,0 +1,39 @@
+.modal .modal-close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 16px;
+  right: 12px;
+}
+
+.modal .modal-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 15px;
+}
+
+.modal .modal-links > li {
+  position: relative;
+  padding-left: 13px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.modal .modal-links > li:last-child {
+  margin-bottom: 0;
+}
+
+.modal .modal-links > li::before {
+  content: '\00bb';
+  position: absolute;
+  left: 0px;
+  display: inline-block;
+  color: #8BB73A;
+}
+
+.modal .modal-links > li a {
+  color: #8BB73A;
+}
+.modal .modal-links > li a:hover {
+  color: #7db025;
+}

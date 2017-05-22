@@ -36,3 +36,10 @@
 .icon-link:hover {
   background-color: #2980b9;
 }
+
+.icon-close::before {
+  background-image: url('../assets/icons/close.svg');
+}
+.icon-close:hover {
+  background-color: #e67e22;
+}

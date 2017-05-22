@@ -22,7 +22,7 @@ class ModalPortal extends Component {
     return this.shouldBeClosed() ? <div/> : (
       <div>
         <div className="modal-container" style={this.props.defaultStyles.overlay}></div>
-        <div className="modal" style={Object.assign({}, this.props.defaultStyles.content, this.props.bounds)}>{this.props.children}</div>
+        <div className="modal" ref={this.props.modalRef} style={Object.assign({}, this.props.defaultStyles.content, this.props.bounds)}>{this.props.children}</div>
       </div>
     )
   }

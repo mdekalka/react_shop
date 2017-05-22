@@ -56,7 +56,7 @@ class Modal extends Component {
     }
 
     this.portal = renderSubtreeIntoContainer(this,
-      <ModalPortal {...props} defaultStyles={Modal.defaultStyles} />, this.node)
+      <ModalPortal modalRef={props.modalRef} {...props} defaultStyles={Modal.defaultStyles} />, this.node)
   }
 
   removePortal () {

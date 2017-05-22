@@ -1,12 +1,48 @@
 export default {
-  react: {
-    title: 'React',
-    content: "// Fullscreen API позволяет приложению переходить в фулл-скрин режим.\n// document.fullscreenEnabled - возвращает boolean значение, показывающее доступен/разрешен ли\n// фулл-скрин режим.\n\n// element.requestFullscreen() - отправляет запрос на фулл-скрин режим для выбранного элемента.\n// Возвращает resolved Promise, если запрос был успешен.\n\n// document.fullscreenElement - возвращает ссылку на элемент, который сейчас находится в фулл-скрин\n// режиме.\n// document.addEventListener('fullscreenchange', eventHandler) - ивент, который триггерится \n// на включение/отключение фулл-скрин режима.\n\n// Передать элемент и сделать запрос на фулл-скрин режим\nfunction onFullScreenHandlerThis(element, event) {\n    var _this = this;\n\n    if (element) {\n        var fsPromise = element[requestFullscreen]();\n\n        if (fsPromise && fsPromise.catch) {\n            maybePromise.catch(function(error) {\n                _this.addLog('Cannot acquire fullscreen mode: ' + error);\n            });\n        }\n    }\n};\n\n// Закрыть фулл-скрин режим\ndocument.exitFullscreen();",
-    links: []
-  },
-  redux: {
-    title: 'Redux',
-    content: '<div className="text"> akjsdgh kakjdgkak dg dsg\n asdsgjgd <spansdgkl sdkjg kjs</span><p>afsasf</p></div>',
-    links: []
-  }
+  key: 'counter',
+  data: [
+    {
+      id: 1,
+      key: 'react',
+      title: 'React',
+      content: [
+        {
+          id: 1,
+          type: 'html',
+          data: 'You should create <span class="highlight">Counter</span> component as <a href="https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components" target="_blank">stateless</a> (functional) component. This feature should encourage you for creation simple, <span class="highlight">reusable</span> components. Easy to use, reuse, understand and testing.'
+        },
+        {
+          id: 2,
+          type: 'prism',
+          data: 'const Counter = ({ onClick, currentCount }) => {\n  // passing props, no local state\n  return (\n    <div className=\"counter-container\">\n      <div className=\"icon-dec pointer\" onClick={() => onClick(false)}>-</div>\n      {currentCount}\n      <div className=\"icon icon-inc pointer\" onClick={() => onClick(true)}>+</div>\n    </div>\n  )\n};\n'
+        },
+        {
+          id: 3,
+          type: 'html',
+          data: 'But sometimes you need to insert custom layout into you component to make it <span class="highlight">highly reusable</span>. You can place any html in the component itself and use <code>this.props.children</code> to insert it.'
+        },
+        {
+          id: 4,
+          type: 'prism',
+          data: 'const Counter = ({ onClick, children }) => {\n  // passing props, no local state\n  return (\n    <div className=\"counter-container\">\n      <div className=\"icon-dec pointer\" onClick={() => onClick(false)}>-</div>\n      {children}\n      <div className=\"icon icon-inc pointer\" onClick={() => onClick(true)}>+</div>\n    </div>\n  )\n};\n\n// ...\n<Counter onClick={/*pass handler*/} />\n  <div className=\"any-custom-layout\">*+$ {/*count value */} $+*</div>\n</Counter>\n\n'
+        },
+        {
+          id: 5,
+          type: 'link',
+          data: [
+            {
+              id: 1,
+              title: 'Presentational and Container Components by Dan Abramov',
+              href: 'https://medium.com/@dan_abramov/smdart-and-dumb-components-7ca2f9a7c7d0',
+            },
+            {
+              id: 2,
+              title: 'Stateful vs Stateless Components by Juan Guardado',
+              href: 'https://medium.com/@juanguardado/stateful-vs-stateless-components-444b5aa21865'
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };

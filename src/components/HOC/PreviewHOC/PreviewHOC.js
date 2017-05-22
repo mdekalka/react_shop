@@ -5,7 +5,7 @@ import AnimatedCircle from '../../AnimatedCircle/AnimatedCircle';
 
 import './PreviewHOC.css';
 
-const PreviewHOC = (className) => (WrappedComponent) => {
+const PreviewHOC = (name, className) => (WrappedComponent) => {
   return class PreviewHOC extends Component {
     static propTypes = {
       onCircleClick: PropTypes.func
@@ -29,7 +29,7 @@ const PreviewHOC = (className) => (WrappedComponent) => {
     onCircleClick = (circle, event) => {
       const bounds = this.countBounds();
 
-      this.props.onCircleClick(circle, bounds, event)
+      this.props.onCircleClick(name, circle, bounds, event)
     }
 
     render() {
