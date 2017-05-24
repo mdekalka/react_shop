@@ -5,7 +5,6 @@ import Counter from '../../Counter/Counter';
 import IconSelector from '../../IconSelector/IconSelector';
 import { CounterPreview, CounterPreviewModel } from '../../Preview/CounterPreview';
 import CartInputsPreview from '../../Preview/CartInputsPreview/CartInputsPreview';
-import AddButtonPreview from '../../Preview/AddButtonPreview/AddButtonPreview';
 import IconSelectorPreview from '../../Preview/IconSelectorPreview/IconSelectorPreview';
 
 import { getFoodList } from '../CartService';
@@ -56,7 +55,7 @@ class CartForm extends Component {
 
         <IconSelectorPreview onIconToggle={onIconToggle} formState={formState} onCircleClick={onCircleClick} />
         <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={onIconSelect} onToggle={onIconToggle} />
-        <AddButtonPreview formState={formState} title={'Add to list'} onCircleClick={onCircleClick} />
+        <button className="btn" type="submit" disabled={!formState.name || !formState.price} >Add to list</button>
       </form>
     )
   }

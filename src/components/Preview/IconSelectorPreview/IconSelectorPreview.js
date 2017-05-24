@@ -12,5 +12,5 @@ const IconSelector = ({ nodeRef, onIconToggle, formState }) => {
   )
 };
 
-export default PreviewHOC('icon-selector-preview')(IconSelector);
+export default PreviewHOC('icon-selector', 'icon-selector-preview')(IconSelector);
 

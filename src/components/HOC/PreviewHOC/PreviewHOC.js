@@ -18,10 +18,8 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
     countBounds() {
       const bounds = this.el.getBoundingClientRect();
 
-      // TODO: when scroll is visible, bounds returns value from top of the screen, handle case for scroll height
-
       return {
-        top: bounds.bottom, // top + height
+        top: bounds.bottom + document.body.scrollTop || 0,
         left: bounds.left
       };
     }

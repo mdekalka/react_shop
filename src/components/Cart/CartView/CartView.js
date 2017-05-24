@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 
 import CartList from '../CartList/CartList';
 import EmptyBlock from '../../EmptyBlock/EmptyBlock';
+import TotalPricePreview from '../../Preview/TotalPricePreview/TotalPricePreview';
 
 import { getTotal } from '../CartService';
 
 import './CartView.css';
 
-const CartView = (props) => {
-  const { cartList, onRemoveItem, onPriceClick } = props;
+const CartView = ({ cartList, onRemoveItem, onPriceClick, onCircleClick }) => {
   const total = getTotal(cartList);
 
   return (
     <div>
       {cartList.length ?
-        <CartList list={cartList} onRemove={onRemoveItem} onPriceClick={onPriceClick} />
+        <CartList list={cartList} onRemove={onRemoveItem} onPriceClick={onPriceClick} onCircleClick={onCircleClick} />
       : <EmptyBlock title='Your cart list is empty' />
       }
-      {cartList.length ? <div className="total-price">Total: {total} $</div> : null}
+      {cartList.length ? <TotalPricePreview onCircleClick={onCircleClick} total={total} /> : null}
     </div>
   )
 };

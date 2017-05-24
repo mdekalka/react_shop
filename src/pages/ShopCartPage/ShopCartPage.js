@@ -8,12 +8,15 @@ import LogoHeaderPreview from '../../components/Preview/LogoHeaderPreview/LogoHe
 import CounterPreviewModel from '../../components/Preview/CounterPreview/CounterPreviewModel';
 import LogoHeaderPreviewModel from '../../components/Preview/LogoHeaderPreview/LogoHeaderPreviewModel';
 import CartInputsPreviewModel from '../../components/Preview/CartInputsPreview/CartInputsPreviewModel';
+import IconSelectorPreviewModel from '../../components/Preview/IconSelectorPreview/IconSelectorPreviewModel';
+import TotalPricePreviewModel from '../../components/Preview/TotalPricePreview/TotalPricePreviewModel';
+import CounterItemPreviewModel from '../../components/Preview/CounterItemPreview/CounterItemPreviewModel';
 
 import { mockedCart } from '../../components/Cart/CartService';
 import { normalizeCartItem, createCartItem } from './model';
 
 const INVALID_COUNT = 0;
-const CONTENT = [CounterPreviewModel, LogoHeaderPreviewModel, CartInputsPreviewModel];
+const CONTENT = [CounterPreviewModel, LogoHeaderPreviewModel, CartInputsPreviewModel, IconSelectorPreviewModel, TotalPricePreviewModel, CounterItemPreviewModel];
 
 class ShopCartPage extends Component {
   state = {
@@ -188,6 +191,7 @@ class ShopCartPage extends Component {
               <CartView 
                 cartList={cartList}
                 onRemoveItem={this.onRemoveItem}
+                onCircleClick={this.onCircleClick}
                 onPriceClick={this.onPriceClick}
               />
             </div>

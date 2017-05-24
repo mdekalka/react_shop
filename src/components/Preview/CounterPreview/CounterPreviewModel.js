@@ -14,17 +14,17 @@ export default {
         {
           id: 2,
           type: 'prism',
-          data: 'const Counter = ({ onClick, currentCount }) => {\n  // passing props, no local state\n  return (\n    <div className=\"counter-container\">\n      <div className=\"icon-dec pointer\" onClick={() => onClick(false)}>-</div>\n      {currentCount}\n      <div className=\"icon icon-inc pointer\" onClick={() => onClick(true)}>+</div>\n    </div>\n  )\n};\n'
+          data: "const Counter = ({ onClick, currentCount }) => {\n  // passing props, no local state\n  return (\n    <div className=\"counter-container\">\n      <div className=\"icon-dec pointer\" onClick={() => onClick(false)}>-</div>\n      {currentCount}\n      <div className=\"icon icon-inc pointer\" onClick={() => onClick(true)}>+</div>\n    </div>\n  )\n};\n"
         },
         {
           id: 3,
           type: 'html',
-          data: 'But sometimes you need to insert custom layout into you component to make it <span class="highlight">highly reusable</span>. You can place any html in the component itself and use <code>this.props.children</code> to insert it.'
+          data: 'But sometimes you need to insert custom layout into you component to make it <span class="highlight">highly reusable</span>. You can place any JSX in the component itself and use <code>this.props.children</code> to retrieve it.'
         },
         {
           id: 4,
           type: 'prism',
-          data: 'const Counter = ({ onClick, children }) => {\n  // passing props, no local state\n  return (\n    <div className=\"counter-container\">\n      <div className=\"icon-dec pointer\" onClick={() => onClick(false)}>-</div>\n      {children}\n      <div className=\"icon icon-inc pointer\" onClick={() => onClick(true)}>+</div>\n    </div>\n  )\n};\n\n// ...\n<Counter onClick={/*pass handler*/} />\n  <div className=\"any-custom-layout\">*+$ {/*count value */} $+*</div>\n</Counter>\n\n'
+          data: "const Counter = ({ onClick, children }) => {\n  // passing props, no local state\n  return (\n    <div className=\"counter-container\">\n      <div className=\"icon-dec pointer\" onClick={() => onClick(false)}>-</div>\n      {children}\n      <div className=\"icon icon-inc pointer\" onClick={() => onClick(true)}>+</div>\n    </div>\n  )\n};\n\n// ...\n<Counter onClick={/*pass handler*/} />\n  <div className=\"any-custom-layout\">*+$ {/*count value */} $+*</div>\n</Counter>\n\n"
         },
         {
           id: 5,

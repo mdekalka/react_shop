@@ -1,4 +1,6 @@
 .react-tabs {
+  display: flex;
+  flex-direction: column;
   color: #ECF0F1;
 }
 
@@ -30,7 +32,8 @@
 }
 
 .react-tabs__tab-panel--selected {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Specific tabs styles */

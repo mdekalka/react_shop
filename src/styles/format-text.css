@@ -20,3 +20,9 @@
   font-size: 14px;
   padding: 15px;
 }
+
+.formatted-paragraph code {
+  background-color: #4e5964;
+  padding: 0 4px;
+  border-radius: 4px;
+}

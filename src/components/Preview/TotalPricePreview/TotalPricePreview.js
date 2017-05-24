@@ -3,4 +3,4 @@ import PreviewHOC from '../../HOC/PreviewHOC/PreviewHOC';
 
 import './TotalPricePreview.css';
 
-export default PreviewHOC('total-price-preview')(TotalPrice);
+export default PreviewHOC('total', 'total-price-preview')(TotalPrice);

@@ -32,6 +32,10 @@
   right: 0;
 }
 
+.cart-item .item-name {
+  margin-bottom: 15px;
+}
+
 .cart-item .item-price {
   align-self: flex-end;
   margin-top: 10px;
@@ -39,8 +43,5 @@
   color: #BDC3C7;
 }
 
-.cart-item .counter-container {
-  margin-top: 15px;
-}
 
 

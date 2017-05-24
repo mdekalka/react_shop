@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import './IconSelector.css';
 
-class IconSelector extends Component {
+class IconSelector extends PureComponent {
   static propTypes = {
     list: PropTypes.array.isRequired,
     isOpen: PropTypes.bool,

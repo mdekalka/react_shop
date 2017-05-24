@@ -36,7 +36,7 @@ class ModalContent extends Component {
 
   renderLinks(content) {
     return (
-      <ul className="modal-links">{content.data.map(link => <li key={link.id}><a href={link.href} target="_blank">{link.title}</a></li>)}</ul>
+      <ul key={content.id} className="modal-links">{content.data.map(link => <li key={link.id}><a href={link.href} target="_blank">{link.title}</a></li>)}</ul>
     )
   }
 
@@ -83,9 +83,9 @@ class ModalContent extends Component {
     return (
       <Modal isOpen={this.props.showModal} bounds={this.props.bounds} modalRef={node => this.modal = node} >
         {this.props.showModal ?
-          <div>
+          <div className="modal-content">
             <Tabs className="react-tabs notes-tabs">
-              {/* TODO: find more optimized way to render multiple JSX tags with saving the structure of resulsting HTML*/}
+              {/* TODO: find more optimized way to render multiple JSX tags with saving the structure of resulting HTML*/}
               <TabList>
                 {preview.map(item => this.renderHeader(item))}
               </TabList>
