@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 import Counter from '../../Counter/Counter';
+import RemoveButton from '../../RemoveButton/RemoveButton';
 
 import { createCartItem } from '../../../pages/ShopCartPage/model';
 import { totalPrice } from '../CartService';
@@ -15,13 +16,17 @@ const CartItem = (props) => {
 
   const onCounter = (direction) => {
     props.onCounterClick(props.item, direction);
-  }
+  };
+
+  const onRemove = () => {
+    props.onRemove(props.item)
+  };
 
   return (
     <div className="cart-item pointer">
       <img className="cart-image" src={image.source} alt="cart icon"/>
       <div className="cart-actions">
-        <div onClick={() => props.onRemove(props.item)} className="icon icon-remove pointer"></div>
+        <RemoveButton onRemove={onRemove} />
         <Link className="icon icon-link pointer" to={`item/${props.item.id}`}></Link>
       </div>
       <div className="cart-info">

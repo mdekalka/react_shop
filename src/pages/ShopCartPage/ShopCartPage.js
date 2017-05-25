@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { animateScroll } from 'react-scroll';
 
 import ModalContent from '../../components/ModalContent/ModalContent';
 import CartForm from '../../components/Cart/CartForm/CartForm';
@@ -17,6 +18,10 @@ import { normalizeCartItem, createCartItem } from './model';
 
 const INVALID_COUNT = 0;
 const CONTENT = [CounterPreviewModel, LogoHeaderPreviewModel, CartInputsPreviewModel, IconSelectorPreviewModel, TotalPricePreviewModel, CounterItemPreviewModel];
+const SCROLL_CONFIG = {
+  duration: 300,
+  smooth: true
+};
 
 class ShopCartPage extends Component {
   state = {
@@ -47,7 +52,7 @@ class ShopCartPage extends Component {
       showModal: true,
       modalContent: this.content[name],
       bounds
-    });
+    }, () => animateScroll.scrollTo(bounds.top - bounds.h, SCROLL_CONFIG));
   }
 
   closeModalHandler = () => {

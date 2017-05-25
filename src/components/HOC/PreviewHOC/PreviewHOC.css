@@ -13,3 +13,7 @@
   left: 0%;
 }
 
+.preview-block.align-right > .animated-circle {
+  left: 100%;
+}
+

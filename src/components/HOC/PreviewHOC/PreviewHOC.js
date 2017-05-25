@@ -20,7 +20,9 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
 
       return {
         top: bounds.bottom + document.body.scrollTop || 0,
-        left: bounds.left
+        left: bounds.left,
+        h: bounds.height,
+        w: bounds.width
       };
     }
 
@@ -31,6 +33,7 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
     }
 
     render() {
+      // TODO: Maybe we can move ref={props.nodeRef} from WrappedComponent to preview-block itself to count boundaries?
       return (
         <div className={`preview-block ${className}`}>
           <WrappedComponent nodeRef={(node) => {this.el = node;}} {...this.props} />

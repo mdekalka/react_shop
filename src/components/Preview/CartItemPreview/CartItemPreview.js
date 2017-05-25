@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 
 import CounterItemPreview from '../CounterItemPreview/CounterItemPreview';
 import PreviewHOC from '../../HOC/PreviewHOC/PreviewHOC';
+import RemoveButtonPreview from '../RemoveButtonPreview/RemoveButtonPreview';
+import LinkPreview from '../LinkPreview/LinkPreview';
 
 import { createCartItem } from '../../../pages/ShopCartPage/model';
 import { totalPrice } from '../../Cart/CartService';
@@ -14,14 +16,18 @@ const CartItemPreview = (props) => {
 
   const onCounter = (direction) => {
     props.onCounterClick(props.item, direction);
+  };
+
+  const onRemove = () => {
+    props.onRemove(props.item);
   }
 
   return (
-    <div className="cart-item pointer" ref={props.nodeRef }>
-      <img className="cart-image" src={image.source} alt="cart icon"/>
+    <div className="cart-item pointer" ref={props.nodeRef} >
+      <img className="cart-image" src={image.source} alt="cart icon" />
       <div className="cart-actions">
-        <div onClick={() => props.onRemove(props.item)} className="icon icon-remove pointer"></div>
-        <Link className="icon icon-link pointer" to={`item/${props.item.id}`}></Link>
+        <RemoveButtonPreview onRemove={onRemove} onCircleClick={props.onCircleClick} />
+        <LinkPreview className="icon icon-link pointer" to={`item/${props.item.id}`} onCircleClick={props.onCircleClick} />
       </div>
       <div className="cart-info">
         <div className="item-name">{name}</div>
