@@ -7,7 +7,8 @@ import PreviewHOC from '../../HOC/PreviewHOC/PreviewHOC';
 import './LinkPreview.css';
 
 const LinkPreview = (props) => {
-  const finalProps = omit(props, ['nodeRef', 'onCircleClick']);
+  // TODO: Find better way to omit not default properties
+  const finalProps = omit(props, ['nodeRef', 'onCircleClick' , 'isOpen']);
 
   return (
     <div ref={props.nodeRef} >

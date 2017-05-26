@@ -15,6 +15,8 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
       onCircleClick: () => {}
     };
 
+    active = false;
+
     countBounds() {
       const bounds = this.el.getBoundingClientRect();
 
@@ -29,7 +31,8 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
     onCircleClick = (circle, event) => {
       const bounds = this.countBounds();
 
-      this.props.onCircleClick(name, circle, bounds, event)
+      this.props.onCircleClick(name, circle, bounds, event);
+      this.active = this.props.isOpen && name === event.currentTarget.getAttribute('data-name');
     }
 
     render() {
@@ -37,7 +40,7 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
       return (
         <div className={`preview-block ${className}`}>
           <WrappedComponent nodeRef={(node) => {this.el = node;}} {...this.props} />
-          <AnimatedCircle onClick={this.onCircleClick} />
+          <AnimatedCircle name={name} onClick={this.onCircleClick} active={this.isOpen} />
         </div>
       )
     }

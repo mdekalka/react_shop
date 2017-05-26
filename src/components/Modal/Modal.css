@@ -1,8 +1,6 @@
 .modal {
   position: absolute;
-  min-width: 200px;
-  max-height: 650px;
-  max-width: 650px;
+  width: 650px;
   padding: 12px;
   border: 1px solid #212F3D;
   background-color: #34495e;

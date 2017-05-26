@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Counter from '../../Counter/Counter';
-import AddButton from '../../AddButton/AddButton';
 import IconSelector from '../../IconSelector/IconSelector';
-import { CounterPreview } from '../../Preview/CounterPreview';
+import CounterPreview from '../../Preview/CounterPreview/CounterPreview';
 import CartInputsPreview from '../../Preview/CartInputsPreview/CartInputsPreview';
 import IconSelectorPreview from '../../Preview/IconSelectorPreview/IconSelectorPreview';
 import AddButtonPreview from '../../Preview/AddButtonPreview/AddButtonPreview';
@@ -24,7 +22,8 @@ class CartForm extends Component {
     onIconToggle: PropTypes.func,
     formState: PropTypes.object,
     isIconSelectorOpen: PropTypes.bool,
-    inputRef: PropTypes.func
+    inputRef: PropTypes.func,
+    isOpen: PropTypes.bool
   };
 
   static defaultProps = {
@@ -36,7 +35,8 @@ class CartForm extends Component {
     onIconToggle: () => {},
     formState: createCartItem(),
     isIconSelectorOpen: false,
-    inputRef: () => {}
+    inputRef: () => {},
+    isOpen: false
   };
 
   state = {
@@ -44,18 +44,18 @@ class CartForm extends Component {
   }
 
   render() {
-    const { onAddItem, onCircleClick, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen, inputRef } = this.props;
+    const { onAddItem, onCircleClick, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen, inputRef, isOpen } = this.props;
     const { foodList } = this.state;
 
     return (
       <form onSubmit={onAddItem}>
-        <CartInputsPreview inputRef={inputRef} formState={formState} onInputChange={onInputChange} onCircleClick={onCircleClick} />
-        <CounterPreview onClick={onCounterClick} onCircleClick={onCircleClick} >
+        <CartInputsPreview inputRef={inputRef} formState={formState} onInputChange={onInputChange} isOpen={isOpen} onCircleClick={onCircleClick} />
+        <CounterPreview onClick={onCounterClick} isOpen={isOpen} onCircleClick={onCircleClick} >
           <div className="counter-value">{formState.count}</div>
         </CounterPreview>
-        <IconSelectorPreview onIconToggle={onIconToggle} formState={formState} onCircleClick={onCircleClick} />
+        <IconSelectorPreview onIconToggle={onIconToggle} formState={formState} isOpen={isOpen} onCircleClick={onCircleClick} />
         <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={onIconSelect} onToggle={onIconToggle} />
-        <AddButtonPreview className="btn" disabled={!formState.name || !formState.price}>Add to list</AddButtonPreview>
+        <AddButtonPreview className="btn" disabled={!formState.name || !formState.price} isOpen={isOpen} onCircleClick={onCircleClick} >Add to list</AddButtonPreview>
       </form>
     )
   }

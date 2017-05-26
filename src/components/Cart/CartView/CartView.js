@@ -9,13 +9,13 @@ import { getTotal } from '../CartService';
 
 import './CartView.css';
 
-const CartView = ({ cartList, onRemoveItem, onPriceClick, onCircleClick }) => {
+const CartView = ({ cartList, onRemoveItem, onPriceClick, isOpen, onCircleClick }) => {
   const total = getTotal(cartList);
 
   return (
     <div>
       {cartList.length ?
-        <CartList list={cartList} onRemove={onRemoveItem} onPriceClick={onPriceClick} onCircleClick={onCircleClick} />
+        <CartList list={cartList} onRemove={onRemoveItem} onPriceClick={onPriceClick} isOpen={isOpen} onCircleClick={onCircleClick} />
       : <EmptyBlock title='Your cart list is empty' />
       }
       {cartList.length ? <TotalPricePreview onCircleClick={onCircleClick} total={total} /> : null}
@@ -26,13 +26,15 @@ const CartView = ({ cartList, onRemoveItem, onPriceClick, onCircleClick }) => {
 CartView.propTypes = {
   cartList: PropTypes.array,
   onRemoveItem: PropTypes.func,
-  onPriceClick: PropTypes.func
+  onPriceClick: PropTypes.func,
+  isOpen: PropTypes.bool
 };
 
 CartView.defaultProps = {
   cartList: [],
   onRemoveItem: () => {},
-  onPriceClick: () => {}
+  onPriceClick: () => {},
+  isOpen: false
 };
 
 export default CartView;

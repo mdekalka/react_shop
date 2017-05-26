@@ -6,7 +6,6 @@ import enhanceWithClickOutside from 'react-click-outside';
 
 import Modal from '../Modal/Modal';
 
-import close from '../../assets/icons/close.svg';
 import './ModalContent.css';
 
 const TYPES = {

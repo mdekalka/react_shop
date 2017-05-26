@@ -9,7 +9,7 @@ export default {
         {
           id: 1,
           type: 'html',
-          data: '<a class="link" target="_blank" href="https://facebook.github.io/react/">React</a> is JavaScript library for building <span class="highlight">predictable</span> user interface'
+          data: '<a class="link" target="_blank" href="https://facebook.github.io/react/">React</a> is JavaScript library for building <span class="highlight">predictable</span> user interface.'
         }
       ]
     },

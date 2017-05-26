@@ -6,20 +6,13 @@ import CartForm from '../../components/Cart/CartForm/CartForm';
 import CartView from '../../components/Cart/CartView/CartView';
 import LogoHeaderPreview from '../../components/Preview/LogoHeaderPreview/LogoHeaderPreview';
 
-import CounterPreviewModel from '../../components/Preview/CounterPreview/CounterPreviewModel';
-import LogoHeaderPreviewModel from '../../components/Preview/LogoHeaderPreview/LogoHeaderPreviewModel';
-import CartInputsPreviewModel from '../../components/Preview/CartInputsPreview/CartInputsPreviewModel';
-import IconSelectorPreviewModel from '../../components/Preview/IconSelectorPreview/IconSelectorPreviewModel';
-import TotalPricePreviewModel from '../../components/Preview/TotalPricePreview/TotalPricePreviewModel';
-import CounterItemPreviewModel from '../../components/Preview/CounterItemPreview/CounterItemPreviewModel';
-
 import { mockedCart } from '../../components/Cart/CartService';
 import { normalizeCartItem, createCartItem } from './model';
+import CONTENT from './preview';
 
 const INVALID_COUNT = 0;
-const CONTENT = [CounterPreviewModel, LogoHeaderPreviewModel, CartInputsPreviewModel, IconSelectorPreviewModel, TotalPricePreviewModel, CounterItemPreviewModel];
 const SCROLL_CONFIG = {
-  duration: 300,
+  duration: 350,
   smooth: true
 };
 
@@ -91,7 +84,7 @@ class ShopCartPage extends Component {
       const newCartItem = normalizeCartItem(prevState.formState);
 
       return {
-        cartList: prevState.cartList.concat(newCartItem)
+        cartList: [...prevState.cartList, newCartItem]
       }
     }, this.resetFormValues);
 
@@ -170,7 +163,7 @@ class ShopCartPage extends Component {
 
     return (
       <div className="row">
-        <LogoHeaderPreview onCircleClick={this.onCircleClick} />
+        <LogoHeaderPreview onCircleClick={this.onCircleClick} isOpen={showModal} />
         <div className="col-half">
           <h3>Add product to your cart list</h3>
           <CartForm
@@ -179,6 +172,7 @@ class ShopCartPage extends Component {
             onCircleClick={this.onCircleClick}
             onIconSelect={this.onIconSelect}
             onAddItem={this.onAddItem}
+            isOpen={showModal}
             onInputChange={this.onInputChange}
             onCounterClick={this.onCounterClick}
             onIconToggle={this.onIconToggle}
@@ -195,6 +189,7 @@ class ShopCartPage extends Component {
               <h3>Product list</h3>
               <CartView 
                 cartList={cartList}
+                isOpen={showModal}
                 onRemoveItem={this.onRemoveItem}
                 onCircleClick={this.onCircleClick}
                 onPriceClick={this.onPriceClick}

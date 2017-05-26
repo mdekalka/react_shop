@@ -9,7 +9,7 @@ export default {
         {
           id: 1,
           type: 'html',
-          data: '<a class="link" target="_blank" href="https://facebook.github.io/react/">React</a> is JavaScript library for building <span class="highlight">predictable</span> user interface'
+          data: 'Declarative routing for React -> <a class="link" target="_blank" href="https://github.com/ReactTraining/react-router">React-router</a> for the win.'
         }
       ]
     },
@@ -21,7 +21,7 @@ export default {
         {
           id: 1,
           type: 'html',
-          data: '<a class="link" target="_blank" href="http://redux.js.org/">Redux</a> is a <span class="highlight">predictable</span> state container for JavaScript apps.'
+          data: 'In some cases you want to do time travel with your application state. Take a look at <a class="link" target="_blank" href="https://github.com/reactjs/react-router-redux">React-router-redux</a>.'
         }
       ]
     }

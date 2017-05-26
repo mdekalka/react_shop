@@ -9,15 +9,73 @@ export default {
         {
           id: 1,
           type: 'html',
-          data: 'You can handle multiple inputs using more <a class="link" target="_blank" href="https://facebook.github.io/react/docs/forms.html#handling-multiple-inputs">smart way</a>. Add <code>name</code> attribute to each element and create <span class="highlight">one</span> handler for setting value based on name attribute.'
+          data: 'When <span class="highlight">adding</span> item to the collection -> prefer to create a brand new collection with new item instead of modifying the old one.'
         },
         {
           id: 2,
           type: 'prism',
-          data: "class MultipleInputs extends Component {\n  state = {\n    name: 'NoNameNPC',\n    numberOfSubs: 0\n  }\n\n  handleChange = (event) => {\n    const target = event.target;\n    // Here you have 'name' of the input element that you defined in JSX\n    const targetName = target.name;\n    this.setState({ [targetName]: target.value });\n  }\n  \n  render() {\n    return (\n      <form>\n      \t<label>Name:\n      \t  <input \n      \t  \tname=\"name\" \n      \t\ttype=\"text\"\n      \t\tonChange={this.handleChange}\n      \t\tvalue={this.state.name} />\n      \t</label>\n      \t<br />\n      \t<label>Number of subscribers:\n      \t  <input \n      \t\tname=\"numberOfSubs\"\n      \t\ttype=\"number\"\n      \t\tonChange={this.handleChange}\n      \t\tvalue={this.state.numberOfSubs} />\n      \t</label>\n      </form>\n    )\n  }\n};"
+          data: "class Cart extends Component {\n  state = {\n  \tcartList: []\n  }\n\n  onAddItem = (newItem) => {\n    this.setState(prevState => {\n      return {\n        cartList: prevState.cartList.concat(newItem) // or [...prevState.cartList. newItem]\n      }\n    });\n  }\n}"
+        },
+        {
+          id: 3,
+          type: 'html',
+          data: 'Also, to achive persistent data you can use <a class="link" href="https://facebook.github.io/react/docs/update.html" target="_blank">Immutability Helpers</a> or <a class="link" target="_blank" href="https://github.com/facebook/immutable-js">immutable-js</a>.'
+        },
+        {
+          id: 4,
+          type: 'link',
+          data: [
+            {
+              id: 1,
+              title: 'Pros and Cons of using immutability with React.js',
+              href: 'http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 2,
+      key: 'redux',
+      title: 'Redux',
+      content: [
+        {
+          id: 1,
+          type: 'html',
+          data: 'Third fundamental principle of Redux -> <a class="link" href="http://redux.js.org/docs/introduction/ThreePrinciples.html#changes-are-made-with-pure-functions" target="_blank">Changes are made with pure functions</a>, so you should not mutate the state.'
+        },
+        {
+          id: 2,
+          type: 'prism',
+          data: "const initialState = {\n  cartList: [],\n  isFetching: false,\n  isFailed: false\n};\n\nconst ShopCartReducer = (state = initialState, action) => {\n  switch (action.type) {\n    case 'ON_ITEM_ADD':\n      // Use object spread operator or Object.assign()\n      return { ...state, cartList: [ ...state.cartList, action.cartItem ] }\n      \n    default:\n      return state;\n  }\n};"
+        },
+        {
+          id: 3,
+          type: 'link',
+          data: [
+            {
+              id: 1,
+              title: 'Three Principles of Redux',
+              href: 'http://redux.js.org/docs/introduction/ThreePrinciples.html#three-principles'
+            },
+            {
+              id: 2,
+              title: 'Reducers in Redux',
+              href: 'http://redux.js.org/docs/basics/Reducers.html'
+            },
+            {
+              id: 3,
+              title: 'Idiomatic Redux: The Tao of Redux, Part 1 by Mark Erikson',
+              href: 'http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-1/'
+            },
+            {
+              id: 4,
+              title: 'Idiomatic Redux: The Tao of Redux, Part 2 by Mark Erikson',
+              href: 'http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/'
+            }
+          ]
         }
       ]
     }
   ]
 };
-
