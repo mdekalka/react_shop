@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import AnimatedCircle from '../../AnimatedCircle/AnimatedCircle';
 
@@ -15,7 +16,7 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
       onCircleClick: () => {}
     };
 
-    active = false;
+    isTarget = false;
 
     countBounds() {
       const bounds = this.el.getBoundingClientRect();
@@ -28,19 +29,27 @@ const PreviewHOC = (name, className) => (WrappedComponent) => {
       };
     }
 
+    clearActiveTarget() {
+      if (!this.props.isOpen) {
+        this.isTarget = false;
+      }
+    }
+
     onCircleClick = (circle, event) => {
       const bounds = this.countBounds();
 
       this.props.onCircleClick(name, circle, bounds, event);
-      this.active = this.props.isOpen && name === event.currentTarget.getAttribute('data-name');
+      this.isTarget = name === event.currentTarget.getAttribute('data-name');
     }
 
     render() {
+      this.clearActiveTarget();
+      const isActive = this.props.isOpen && this.isTarget;
       // TODO: Maybe we can move ref={props.nodeRef} from WrappedComponent to preview-block itself to count boundaries?
       return (
-        <div className={`preview-block ${className}`}>
+        <div className={classNames(`preview-block ${className}`, {'active': isActive })} >
           <WrappedComponent nodeRef={(node) => {this.el = node;}} {...this.props} />
-          <AnimatedCircle name={name} onClick={this.onCircleClick} active={this.isOpen} />
+          <AnimatedCircle name={name} onClick={this.onCircleClick} active={isActive} />
         </div>
       )
     }

@@ -37,13 +37,13 @@
 }
 
 .animated-circle.active .inner-circle.anim-rotate {
-  border-top-color: #6C7A89;
-  border-bottom-color: #6C7A89;
+  border-top-color: #58636f;
+  border-bottom-color: #58636f;
 }
 
 .animated-circle.active .outer-circle.anim-rotate {
-  border-top-color: #58636f;
-  border-bottom-color: #58636f;
+  border-top-color: #6C7A89;
+  border-bottom-color: #6C7A89;
 }
 
 .animated-circle .outer-circle {

@@ -12,7 +12,7 @@ import CONTENT from './preview';
 
 const INVALID_COUNT = 0;
 const SCROLL_CONFIG = {
-  duration: 350,
+  duration: 200,
   smooth: true
 };
 
