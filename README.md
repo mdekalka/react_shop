@@ -2,6 +2,8 @@
 
 Shop Cart app using React&Redux.
 
+![preview](https://cloud.githubusercontent.com/assets/5993559/26680747/3beffe9a-46e3-11e7-839b-93df9c2ab289.gif)
+
 Shop Cart is divided into three parts:
 
 * `master` branch is a React implementation of Shop Cart.
