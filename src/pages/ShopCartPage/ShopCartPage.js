@@ -10,6 +10,8 @@ import { mockedCart } from '../../components/Cart/CartService';
 import { normalizeCartItem, createCartItem } from './model';
 import CONTENT from './preview';
 
+import octo from '../../assets/icons/octo/GitHub-Mark-Light-32px.png';
+
 const INVALID_COUNT = 0;
 const SCROLL_CONFIG = {
   duration: 200,
@@ -163,6 +165,7 @@ class ShopCartPage extends Component {
 
     return (
       <div className="row">
+        <a href="https://github.com/mdekalka/react_shop" target="_blank"><img src={octo} alt="github link" /></a>
         <LogoHeaderPreview onCircleClick={this.onCircleClick} isOpen={showModal} />
         <div className="col-half">
           <h3>Add product to your cart list</h3>
