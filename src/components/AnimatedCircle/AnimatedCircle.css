@@ -4,11 +4,11 @@
 }
 
 .animated-circle:hover .inner-circle {
-  border-color: #FBA026;
+  border-color: #F4D03F;
 }
 
 .animated-circle:hover .outer-circle {
-  border-color: #F37934;
+  border-color: #F7CA18;
 }
 
 .animated-circle .inner-circle,
@@ -23,42 +23,38 @@
   height: 28px;
   top: 3px;
   left: 3px;
-  border: 3px solid #F4D03F;
+  border: 2px solid #58636f;
 }
 
 .animated-circle .inner-circle.anim-circle {
+  border: 3px solid #F4D03F;
   animation: inner-circle-loop 1.7s infinite;
 }
 
 .animated-circle .inner-circle.anim-rotate {
-  border-left-color: transparent;
-  border-right-color: transparent;
   animation: rotate linear 2.7s reverse infinite;
 }
 
 .animated-circle.active .inner-circle.anim-rotate {
-  border-top-color: #58636f;
-  border-bottom-color: #58636f;
+  border-right-color: transparent;
 }
 
 .animated-circle.active .outer-circle.anim-rotate {
-  border-top-color: #6C7A89;
-  border-bottom-color: #6C7A89;
+  border-left-color: transparent;
 }
 
 .animated-circle .outer-circle {
   width: 34px;
   height: 34px;
-  border: 2px solid #F7CA18;
+  border: 2px solid #6C7A89;
 }
 
 .animated-circle .outer-circle.anim-circle {
+  border: 2px solid #F7CA18;
   animation: outer-circle-loop 1.7s infinite;
 }
 
 .animated-circle .outer-circle.anim-rotate {
-  border-left-color: transparent;
-  border-right-color: transparent;
   animation: rotate linear 2.7s infinite;
 }
 
