@@ -29,7 +29,7 @@ const ShopCartReducer = (state = initialState, action) => {
         ...state,
         cartList: state.cartList.map(cartItem => {
           if (cartItem.id === action.id) {
-            cartItem.count = action.count;
+            return { ...cartItem, count: action.count };
           }
 
           return cartItem;
