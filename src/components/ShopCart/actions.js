@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import types from './types';
 import config from '../../constants/constants';
-import { normalizeCartItem } from '../../pages/ShopCartPage/model';
+import { normalizeCartItem } from '../Cart/cartModel';
 
 // Action creators
 export const fetchCartList = () => {

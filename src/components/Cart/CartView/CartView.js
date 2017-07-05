@@ -4,35 +4,37 @@ import PropTypes from 'prop-types';
 import CartList from '../CartList/CartList';
 import EmptyBlock from '../../EmptyBlock/EmptyBlock';
 
+import { getTotal } from '../cartService';
+
 import './CartView.css';
 
 const CartView = (props) => {
-  const { cartList, onRemoveItem, onPriceClick, total } = props;
+  const { list, onRemoveItem, onPriceClick } = props;
+  const total = getTotal(list);
 
   return (
     <div>
-      {cartList.length ?
-        <CartList list={cartList} onRemove={onRemoveItem} onPriceClick={onPriceClick} />
+      {list.length
+      ? <CartList list={list} onRemove={onRemoveItem} onPriceClick={onPriceClick} />
       : <EmptyBlock title='Your cart list is empty' />
       }
-      {cartList.length ? <div className="total-price">Total: {total} $</div> : null}
+      {list.length ? <div className="total-price">Total: {total} $</div> : null}
     </div>
   )
 };
 
 CartView.propTypes = {
-  cartList: PropTypes.array,
+  list: PropTypes.array,
   onRemoveItem: PropTypes.func,
   onPriceClick: PropTypes.func,
   total: PropTypes.number
 };
 
 CartView.defaultProps = {
-  cartList: [],
+  list: [],
   onRemoveItem: () => {},
   onPriceClick: () => {},
   total: null
 };
 
 export default CartView;
- 

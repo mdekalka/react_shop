@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import ShopCartReducer from '../pages/ShopCartPage/reducer';
+import ShopCartReducer from '../components/ShopCart/reducer';
 
 const rootReducer = combineReducers({
     shopCart: ShopCartReducer

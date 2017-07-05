@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { getTotal } from '../../components/Cart/CartService';
+import { getTotal } from '../Cart/cartService';
 
 const getCartList = (state) => state.shopCart.cartList;
 

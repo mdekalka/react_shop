@@ -8,6 +8,8 @@ export const foodList = [apple, carrot, fish, cupcake];
 
 export const cartIcon = cart;
 
+export const INVALID_COUNT = 0;
+
 export const getFoodList = () => {
   return foodList.map((foodItem, index) => {
     return {
@@ -25,6 +27,10 @@ export const getTotal = (list) => {
   return list.reduce((acc, value) => {
     return acc + totalPrice(value.count, value.price);
   }, 0);
+};
+
+export const countPrice = (count, direction) => {
+  return direction ? count += 1 : count -= 1;
 };
 
 export const findById = (list, id) => list.find(listItem => listItem.id === id);
