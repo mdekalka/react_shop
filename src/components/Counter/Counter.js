@@ -8,9 +8,9 @@ const Counter = (props) => {
 
   return (
     <div className="counter-container">
-      <div className="counter-option icon icon-dec pointer" onClick={() => onClick(false)}></div>
+      <button type="button" className="counter-option icon icon-dec pointer" onClick={() => onClick(false)}></button>
       {props.children}
-      <div className="counter-option icon icon-inc pointer" onClick={() => onClick(true)}></div>
+      <button type="button" className="counter-option icon icon-inc pointer" onClick={() => onClick(true)}></button>
     </div>
   )
 };

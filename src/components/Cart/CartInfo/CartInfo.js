@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
-import { createCartItem } from '../../../pages/ShopCartPage/model';
-import { totalPrice } from '../CartService';
+import { createCartItem } from '../cartModel';
+import { totalPrice } from '../cartService';
 
 import './CartInfo.css';
 

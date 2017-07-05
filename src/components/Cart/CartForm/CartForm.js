@@ -4,44 +4,101 @@ import PropTypes from 'prop-types';
 import Counter from '../../Counter/Counter';
 import IconSelector from '../../IconSelector/IconSelector';
 
-import { getFoodList } from '../CartService';
-import { createCartItem } from '../../../pages/ShopCartPage/model';
+import { getFoodList, countPrice, INVALID_COUNT } from '../cartService';
+import { createCartItem } from '../cartModel';
 
 import './CartForm.css';
 
 class CartForm extends Component {
   static propTypes = {
-    onAddItem: PropTypes.func,
-    onInputChange: PropTypes.func.isRequired,
-    onCounterClick: PropTypes.func,
-    onIconSelect: PropTypes.func,
-    onIconToggle: PropTypes.func,
-    formState: PropTypes.object,
-    isIconSelectorOpen: PropTypes.bool,
-    inputRef: PropTypes.func
+    onAdd: PropTypes.func
   };
 
   static defaultProps = {
-    onAddItem: () => {},
-    onInputChange: () => {},
-    onCounterClick: () => {},
-    onIconSelect: () => {},
-    onIconToggle: () => {},
-    formState: createCartItem(),
-    isIconSelectorOpen: false,
-    inputRef: () => {}
+    onAdd: () => {}
   };
 
   state = {
-    foodList: getFoodList()
+    formState: createCartItem(),
+    foodList: getFoodList(),
+    isIconSelectorOpen: false,
+  }
+
+  setNameFocus() {
+    this.inputElement.focus();
+  }
+
+  onAddItem = (event) => {
+    event.preventDefault();
+
+    this.props.onAdd({ ...this.state.formState }, () => {
+      this.resetFormValues();
+      this.setNameFocus();
+    });
+  }
+
+  onIconToggle = (state) => {
+    if (typeof state !== 'boolean') {
+      state = !this.state.isIconSelectorOpen;
+    }
+
+    this.setState(prevState => {
+      return {
+        isIconSelectorOpen: state
+      }
+    });
+  }
+
+  onIconSelect = (selectedIcon) => {
+    this.setState(prevState => {
+      return {
+        formState: ({ ...prevState.formState, image: selectedIcon }),
+        isIconSelectorOpen: false
+      }
+    });
+  }
+
+  changeInputValue(name, value) {
+    this.setState(prevState => {
+      return {
+        formState: ({ ...prevState.formState, [name]: value })
+      }
+    });
+  }
+
+  onInputChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+
+    this.changeInputValue(target.name, value);
+  }
+
+  resetFormValues() {
+    this.setState(prevState => {
+      return {
+        formState: createCartItem()
+      }
+    });
+  }
+
+  onCounterClick = (direction) => {
+    this.setState(prevState => {
+      let updatedCount = countPrice(prevState.formState.count, direction);
+      if (updatedCount <= INVALID_COUNT) {
+        return;
+      }
+
+      return {
+        formState: ({ ...prevState.formState, count: updatedCount })
+      }
+    });
   }
 
   render() {
-    const { onAddItem, onInputChange, onCounterClick, onIconSelect, onIconToggle, formState, isIconSelectorOpen, inputRef } = this.props;
-    const { foodList } = this.state;
+    const { formState, foodList, isIconSelectorOpen } = this.state;
 
     return (
-      <form onSubmit={onAddItem}>
+      <form onSubmit={this.onAddItem}>
         <div className="form-row">
           <label>
             <input 
@@ -52,8 +109,8 @@ class CartForm extends Component {
               autoFocus
               className="full-width"
               value={formState.name}
-              ref={inputRef}
-              onChange={onInputChange}
+              ref={(input) => { this.inputElement = input; }}
+              onChange={this.onInputChange}
             />
           </label>
         </div>
@@ -67,15 +124,15 @@ class CartForm extends Component {
               min="0"
               className="full-width"
               value={formState.price}
-              onChange={onInputChange}
+              onChange={this.onInputChange}
             />
           </label>
         </div>
-        <Counter onClick={onCounterClick}>
+        <Counter onClick={this.onCounterClick}>
           <div className="counter-value">{formState.count}</div>
         </Counter>
-        <div className="avatar-icon pointer" onClick={onIconToggle}><img src={formState.image.source} alt="icon food choose"/></div>
-        <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={onIconSelect} onToggle={onIconToggle} />
+        <div className="avatar-icon pointer" onClick={this.onIconToggle}><img src={formState.image.source} alt="icon food choose"/></div>
+        <IconSelector list={foodList} isOpen={isIconSelectorOpen} onSelect={this.onIconSelect} onToggle={this.onIconToggle} />
         <button className="btn" type="submit" disabled={!formState.name || !formState.price}>Add to list</button>
       </form>
     )
