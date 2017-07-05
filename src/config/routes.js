@@ -8,7 +8,7 @@ const history = createHashHistory();
 
 const routes = (
   <Router history={history} >
-    <Route path="/" component={App} />
+    <App />
   </Router>
 );
 

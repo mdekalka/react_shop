@@ -70,7 +70,7 @@ class ShopCart extends Component {
             <h3>Product list</h3>
             <Switch>
               <Route exact path="/" render={() => <CartView list={cartList} onRemoveItem={this.onRemoveItem} onPriceClick={this.onPriceClick} />} />
-              <Route exact path="/item/:id" render={({ match }) => <CartInfo info={findById(cartList, match.params.id)} />} />
+              <Route path="/item/:id" render={({ match }) => <CartInfo info={findById(cartList, match.params.id)} />} />
             </Switch>
           </div>
         </div>
