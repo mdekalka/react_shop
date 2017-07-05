@@ -1,13 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createHashHistory  } from 'history';
+import { HashRouter as Router } from 'react-router-dom';
 
 import App from '../App';
 
-const history = createHashHistory();
-
 const routes = (
-  <Router history={history} >
+  <Router>
     <App />
   </Router>
 );
