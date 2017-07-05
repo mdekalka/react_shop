@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -56,7 +56,7 @@ export class ShopCart extends Component {
             {isFailed && !isFetching
             ? <div>Something went wrong: {errorMessage}</div>
             : <Switch>
-                <Route exact path="/" render={() => <CartView list={cartList} onRemoveItem={this.onRemoveItem} total={totalPrice} onPriceClick={this.onPriceClick} />} />
+                <Route exact path="/" render={(props) => <CartView {...props} list={cartList} onRemoveItem={this.onRemoveItem} total={totalPrice} onPriceClick={this.onPriceClick} />} />
                 <Route exact path="/item/:id" render={({ match }) => <CartInfo info={findById(cartList, match.params.id)} />} />
               </Switch>
             }
@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch) => {
         shopCartActions: bindActionCreators(shopCartActions, dispatch)
     }
 };
-
-ShopCart = connect(mapStateToProps, mapDispatchToProps)(ShopCart);
+// Bug described here: https://github.com/ReactTraining/react-router/issues/4671
+ShopCart = withRouter(connect(mapStateToProps, mapDispatchToProps)(ShopCart));
 
 export default ShopCart;

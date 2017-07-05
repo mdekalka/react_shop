@@ -22,7 +22,7 @@ const CartItem = (props) => {
       <img className="cart-image" src={image.source} alt="cart icon"/>
       <div className="cart-actions">
         <div onClick={() => props.onRemove(props.item)} className="icon icon-remove pointer"></div>
-        <Link className="icon icon-link pointer" to={`item/${props.item.id}`}></Link>
+        <Link className="icon icon-link pointer" to={`/item/${props.item.id}`}></Link>
       </div>
       <div className="cart-info">
         <div className="item-name">{name}</div>
